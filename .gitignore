@@ -1,0 +1,6 @@
+.env
+.venv/
+__pycache__/
+# run logs are not committed; the folder itself is kept via .gitkeep
+logs/*
+!logs/.gitkeep
