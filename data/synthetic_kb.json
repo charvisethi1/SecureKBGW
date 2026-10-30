@@ -1,0 +1,602 @@
+[
+ {
+  "id": "EXP-0000",
+  "title": "Grignard addition failure with copper iodide (EXP-0000)",
+  "text": "EXP-0000 attempted Grignard addition of a nitroarene using copper iodide at 105 C for 24 hours. The isolated yield was only 6 percent. The main failure cause was catalyst deactivation. Recommended next step is dry solvent before repeating EXP-0000. Internal note for EXP-0000: batch 1950 should not be reused."
+ },
+ {
+  "id": "EXP-0001",
+  "title": "Sonogashira coupling failure with ruthenium complex (EXP-0001)",
+  "text": "EXP-0001 attempted Sonogashira coupling of a aryl bromide using ruthenium complex at 85 C for 16 hours. The isolated yield was only 4 percent. The main failure cause was moisture ingress. Recommended next step is shorter reaction time before repeating EXP-0001. Internal note for EXP-0001: batch 2486 should not be reused."
+ },
+ {
+  "id": "EXP-0002",
+  "title": "Sonogashira coupling failure with zinc triflate (EXP-0002)",
+  "text": "EXP-0002 attempted Sonogashira coupling of a aryl bromide using zinc triflate at 120 C for 37 hours. The isolated yield was only 3 percent. The main failure cause was moisture ingress. Recommended next step is slower reagent addition before repeating EXP-0002. Internal note for EXP-0002: batch 7499 should not be reused."
+ },
+ {
+  "id": "EXP-0003",
+  "title": "Suzuki coupling failure with ruthenium complex (EXP-0003)",
+  "text": "EXP-0003 attempted Suzuki coupling of a aryl bromide using ruthenium complex at 85 C for 35 hours. The isolated yield was only 9 percent. The main failure cause was competing side reaction. Recommended next step is higher dilution before repeating EXP-0003. Internal note for EXP-0003: batch 2929 should not be reused."
+ },
+ {
+  "id": "EXP-0004",
+  "title": "epoxidation failure with iron oxalate (EXP-0004)",
+  "text": "EXP-0004 attempted epoxidation of a aliphatic aldehyde using iron oxalate at 75 C for 36 hours. The isolated yield was only 6 percent. The main failure cause was moisture ingress. Recommended next step is slower reagent addition before repeating EXP-0004. Internal note for EXP-0004: batch 2028 should not be reused."
+ },
+ {
+  "id": "EXP-0005",
+  "title": "epoxidation failure with palladium acetate (EXP-0005)",
+  "text": "EXP-0005 attempted epoxidation of a secondary amine using palladium acetate at 70 C for 38 hours. The isolated yield was only 29 percent. The main failure cause was unexpected dimerisation. Recommended next step is shorter reaction time before repeating EXP-0005. Internal note for EXP-0005: batch 8424 should not be reused."
+ },
+ {
+  "id": "EXP-0006",
+  "title": "Grignard addition failure with iron oxalate (EXP-0006)",
+  "text": "EXP-0006 attempted Grignard addition of a secondary amine using iron oxalate at 30 C for 34 hours. The isolated yield was only 19 percent. The main failure cause was competing side reaction. Recommended next step is slower reagent addition before repeating EXP-0006. Internal note for EXP-0006: batch 9111 should not be reused."
+ },
+ {
+  "id": "EXP-0007",
+  "title": "Grignard addition failure with rhodium hydride (EXP-0007)",
+  "text": "EXP-0007 attempted Grignard addition of a vinyl triflate using rhodium hydride at 100 C for 11 hours. The isolated yield was only 26 percent. The main failure cause was moisture ingress. Recommended next step is dry solvent before repeating EXP-0007. Internal note for EXP-0007: batch 6604 should not be reused."
+ },
+ {
+  "id": "EXP-0008",
+  "title": "reductive amination failure with rhodium hydride (EXP-0008)",
+  "text": "EXP-0008 attempted reductive amination of a nitroarene using rhodium hydride at 105 C for 22 hours. The isolated yield was only 20 percent. The main failure cause was catalyst deactivation. Recommended next step is dry solvent before repeating EXP-0008. Internal note for EXP-0008: batch 6737 should not be reused."
+ },
+ {
+  "id": "EXP-0009",
+  "title": "epoxidation failure with rhodium hydride (EXP-0009)",
+  "text": "EXP-0009 attempted epoxidation of a alkyl iodide using rhodium hydride at 60 C for 45 hours. The isolated yield was only 30 percent. The main failure cause was moisture ingress. Recommended next step is dry solvent before repeating EXP-0009. Internal note for EXP-0009: batch 2064 should not be reused."
+ },
+ {
+  "id": "EXP-0010",
+  "title": "Suzuki coupling failure with iron oxalate (EXP-0010)",
+  "text": "EXP-0010 attempted Suzuki coupling of a alkyl iodide using iron oxalate at 125 C for 2 hours. The isolated yield was only 22 percent. The main failure cause was product decomposition. Recommended next step is shorter reaction time before repeating EXP-0010. Internal note for EXP-0010: batch 8564 should not be reused."
+ },
+ {
+  "id": "EXP-0011",
+  "title": "Grignard addition failure with copper iodide (EXP-0011)",
+  "text": "EXP-0011 attempted Grignard addition of a heteroaryl chloride using copper iodide at 50 C for 9 hours. The isolated yield was only 18 percent. The main failure cause was unexpected dimerisation. Recommended next step is lower temperature before repeating EXP-0011. Internal note for EXP-0011: batch 5056 should not be reused."
+ },
+ {
+  "id": "EXP-0012",
+  "title": "esterification failure with zinc triflate (EXP-0012)",
+  "text": "EXP-0012 attempted esterification of a alkyl iodide using zinc triflate at 90 C for 36 hours. The isolated yield was only 25 percent. The main failure cause was moisture ingress. Recommended next step is alternative ligand before repeating EXP-0012. Internal note for EXP-0012: batch 5552 should not be reused."
+ },
+ {
+  "id": "EXP-0013",
+  "title": "reductive amination failure with zinc triflate (EXP-0013)",
+  "text": "EXP-0013 attempted reductive amination of a vinyl triflate using zinc triflate at 125 C for 15 hours. The isolated yield was only 24 percent. The main failure cause was incomplete conversion. Recommended next step is different base before repeating EXP-0013. Internal note for EXP-0013: batch 3472 should not be reused."
+ },
+ {
+  "id": "EXP-0014",
+  "title": "Buchwald amination failure with copper iodide (EXP-0014)",
+  "text": "EXP-0014 attempted Buchwald amination of a aliphatic aldehyde using copper iodide at 20 C for 38 hours. The isolated yield was only 31 percent. The main failure cause was poor solubility. Recommended next step is slower reagent addition before repeating EXP-0014. Internal note for EXP-0014: batch 3987 should not be reused."
+ },
+ {
+  "id": "EXP-0015",
+  "title": "Heck reaction failure with iron oxalate (EXP-0015)",
+  "text": "EXP-0015 attempted Heck reaction of a aryl bromide using iron oxalate at 105 C for 40 hours. The isolated yield was only 23 percent. The main failure cause was competing side reaction. Recommended next step is shorter reaction time before repeating EXP-0015. Internal note for EXP-0015: batch 6220 should not be reused."
+ },
+ {
+  "id": "EXP-0016",
+  "title": "reductive amination failure with palladium acetate (EXP-0016)",
+  "text": "EXP-0016 attempted reductive amination of a alkyl iodide using palladium acetate at 80 C for 7 hours. The isolated yield was only 25 percent. The main failure cause was incomplete conversion. Recommended next step is shorter reaction time before repeating EXP-0016. Internal note for EXP-0016: batch 8889 should not be reused."
+ },
+ {
+  "id": "EXP-0017",
+  "title": "esterification failure with palladium acetate (EXP-0017)",
+  "text": "EXP-0017 attempted esterification of a secondary amine using palladium acetate at 90 C for 8 hours. The isolated yield was only 10 percent. The main failure cause was moisture ingress. Recommended next step is slower reagent addition before repeating EXP-0017. Internal note for EXP-0017: batch 6571 should not be reused."
+ },
+ {
+  "id": "EXP-0018",
+  "title": "epoxidation failure with palladium acetate (EXP-0018)",
+  "text": "EXP-0018 attempted epoxidation of a heteroaryl chloride using palladium acetate at 105 C for 24 hours. The isolated yield was only 6 percent. The main failure cause was catalyst deactivation. Recommended next step is alternative ligand before repeating EXP-0018. Internal note for EXP-0018: batch 1417 should not be reused."
+ },
+ {
+  "id": "EXP-0019",
+  "title": "Buchwald amination failure with ruthenium complex (EXP-0019)",
+  "text": "EXP-0019 attempted Buchwald amination of a nitroarene using ruthenium complex at 75 C for 31 hours. The isolated yield was only 23 percent. The main failure cause was competing side reaction. Recommended next step is higher dilution before repeating EXP-0019. Internal note for EXP-0019: batch 3012 should not be reused."
+ },
+ {
+  "id": "EXP-0020",
+  "title": "Buchwald amination failure with rhodium hydride (EXP-0020)",
+  "text": "EXP-0020 attempted Buchwald amination of a alkyl iodide using rhodium hydride at 65 C for 10 hours. The isolated yield was only 5 percent. The main failure cause was unexpected dimerisation. Recommended next step is microwave heating before repeating EXP-0020. Internal note for EXP-0020: batch 2674 should not be reused."
+ },
+ {
+  "id": "EXP-0021",
+  "title": "Grignard addition failure with iron oxalate (EXP-0021)",
+  "text": "EXP-0021 attempted Grignard addition of a alkyl iodide using iron oxalate at 50 C for 24 hours. The isolated yield was only 33 percent. The main failure cause was competing side reaction. Recommended next step is lower temperature before repeating EXP-0021. Internal note for EXP-0021: batch 3401 should not be reused."
+ },
+ {
+  "id": "EXP-0022",
+  "title": "Sonogashira coupling failure with palladium acetate (EXP-0022)",
+  "text": "EXP-0022 attempted Sonogashira coupling of a vinyl triflate using palladium acetate at 100 C for 11 hours. The isolated yield was only 23 percent. The main failure cause was moisture ingress. Recommended next step is higher dilution before repeating EXP-0022. Internal note for EXP-0022: batch 6827 should not be reused."
+ },
+ {
+  "id": "EXP-0023",
+  "title": "aldol condensation failure with platinum black (EXP-0023)",
+  "text": "EXP-0023 attempted aldol condensation of a secondary amine using platinum black at 80 C for 13 hours. The isolated yield was only 14 percent. The main failure cause was poor solubility. Recommended next step is slower reagent addition before repeating EXP-0023. Internal note for EXP-0023: batch 9480 should not be reused."
+ },
+ {
+  "id": "EXP-0024",
+  "title": "hydrogenation failure with platinum black (EXP-0024)",
+  "text": "EXP-0024 attempted hydrogenation of a aryl bromide using platinum black at 95 C for 13 hours. The isolated yield was only 16 percent. The main failure cause was catalyst deactivation. Recommended next step is higher dilution before repeating EXP-0024. Internal note for EXP-0024: batch 6640 should not be reused."
+ },
+ {
+  "id": "EXP-0025",
+  "title": "hydrogenation failure with platinum black (EXP-0025)",
+  "text": "EXP-0025 attempted hydrogenation of a benzylic alcohol using platinum black at 35 C for 31 hours. The isolated yield was only 14 percent. The main failure cause was moisture ingress. Recommended next step is slower reagent addition before repeating EXP-0025. Internal note for EXP-0025: batch 4222 should not be reused."
+ },
+ {
+  "id": "EXP-0026",
+  "title": "Grignard addition failure with ruthenium complex (EXP-0026)",
+  "text": "EXP-0026 attempted Grignard addition of a alkyl iodide using ruthenium complex at 120 C for 42 hours. The isolated yield was only 22 percent. The main failure cause was catalyst deactivation. Recommended next step is microwave heating before repeating EXP-0026. Internal note for EXP-0026: batch 2389 should not be reused."
+ },
+ {
+  "id": "EXP-0027",
+  "title": "Buchwald amination failure with zinc triflate (EXP-0027)",
+  "text": "EXP-0027 attempted Buchwald amination of a secondary amine using zinc triflate at 85 C for 6 hours. The isolated yield was only 21 percent. The main failure cause was unexpected dimerisation. Recommended next step is alternative ligand before repeating EXP-0027. Internal note for EXP-0027: batch 7485 should not be reused."
+ },
+ {
+  "id": "EXP-0028",
+  "title": "hydrogenation failure with zinc triflate (EXP-0028)",
+  "text": "EXP-0028 attempted hydrogenation of a heteroaryl chloride using zinc triflate at 40 C for 10 hours. The isolated yield was only 1 percent. The main failure cause was competing side reaction. Recommended next step is alternative ligand before repeating EXP-0028. Internal note for EXP-0028: batch 8624 should not be reused."
+ },
+ {
+  "id": "EXP-0029",
+  "title": "reductive amination failure with rhodium hydride (EXP-0029)",
+  "text": "EXP-0029 attempted reductive amination of a benzylic alcohol using rhodium hydride at 20 C for 47 hours. The isolated yield was only 0 percent. The main failure cause was competing side reaction. Recommended next step is alternative ligand before repeating EXP-0029. Internal note for EXP-0029: batch 2683 should not be reused."
+ },
+ {
+  "id": "EXP-0030",
+  "title": "Sonogashira coupling failure with copper iodide (EXP-0030)",
+  "text": "EXP-0030 attempted Sonogashira coupling of a nitroarene using copper iodide at 20 C for 14 hours. The isolated yield was only 16 percent. The main failure cause was poor solubility. Recommended next step is slower reagent addition before repeating EXP-0030. Internal note for EXP-0030: batch 5799 should not be reused."
+ },
+ {
+  "id": "EXP-0031",
+  "title": "Sonogashira coupling failure with ruthenium complex (EXP-0031)",
+  "text": "EXP-0031 attempted Sonogashira coupling of a benzylic alcohol using ruthenium complex at 40 C for 23 hours. The isolated yield was only 3 percent. The main failure cause was product decomposition. Recommended next step is shorter reaction time before repeating EXP-0031. Internal note for EXP-0031: batch 8506 should not be reused."
+ },
+ {
+  "id": "EXP-0032",
+  "title": "epoxidation failure with zinc triflate (EXP-0032)",
+  "text": "EXP-0032 attempted epoxidation of a aliphatic aldehyde using zinc triflate at 90 C for 39 hours. The isolated yield was only 11 percent. The main failure cause was competing side reaction. Recommended next step is lower temperature before repeating EXP-0032. Internal note for EXP-0032: batch 1064 should not be reused."
+ },
+ {
+  "id": "EXP-0033",
+  "title": "reductive amination failure with copper iodide (EXP-0033)",
+  "text": "EXP-0033 attempted reductive amination of a aliphatic aldehyde using copper iodide at 105 C for 21 hours. The isolated yield was only 3 percent. The main failure cause was unexpected dimerisation. Recommended next step is dry solvent before repeating EXP-0033. Internal note for EXP-0033: batch 9492 should not be reused."
+ },
+ {
+  "id": "EXP-0034",
+  "title": "Sonogashira coupling failure with rhodium hydride (EXP-0034)",
+  "text": "EXP-0034 attempted Sonogashira coupling of a heteroaryl chloride using rhodium hydride at 50 C for 3 hours. The isolated yield was only 17 percent. The main failure cause was catalyst deactivation. Recommended next step is slower reagent addition before repeating EXP-0034. Internal note for EXP-0034: batch 2601 should not be reused."
+ },
+ {
+  "id": "EXP-0035",
+  "title": "Sonogashira coupling failure with rhodium hydride (EXP-0035)",
+  "text": "EXP-0035 attempted Sonogashira coupling of a aryl bromide using rhodium hydride at 70 C for 39 hours. The isolated yield was only 32 percent. The main failure cause was moisture ingress. Recommended next step is microwave heating before repeating EXP-0035. Internal note for EXP-0035: batch 9391 should not be reused."
+ },
+ {
+  "id": "EXP-0036",
+  "title": "aldol condensation failure with iron oxalate (EXP-0036)",
+  "text": "EXP-0036 attempted aldol condensation of a alkyl iodide using iron oxalate at 130 C for 17 hours. The isolated yield was only 33 percent. The main failure cause was unexpected dimerisation. Recommended next step is slower reagent addition before repeating EXP-0036. Internal note for EXP-0036: batch 4319 should not be reused."
+ },
+ {
+  "id": "EXP-0037",
+  "title": "hydrogenation failure with copper iodide (EXP-0037)",
+  "text": "EXP-0037 attempted hydrogenation of a nitroarene using copper iodide at 90 C for 5 hours. The isolated yield was only 20 percent. The main failure cause was moisture ingress. Recommended next step is shorter reaction time before repeating EXP-0037. Internal note for EXP-0037: batch 4942 should not be reused."
+ },
+ {
+  "id": "EXP-0038",
+  "title": "esterification failure with nickel chloride (EXP-0038)",
+  "text": "EXP-0038 attempted esterification of a secondary amine using nickel chloride at 40 C for 10 hours. The isolated yield was only 23 percent. The main failure cause was product decomposition. Recommended next step is dry solvent before repeating EXP-0038. Internal note for EXP-0038: batch 5146 should not be reused."
+ },
+ {
+  "id": "EXP-0039",
+  "title": "reductive amination failure with rhodium hydride (EXP-0039)",
+  "text": "EXP-0039 attempted reductive amination of a secondary amine using rhodium hydride at 95 C for 43 hours. The isolated yield was only 10 percent. The main failure cause was moisture ingress. Recommended next step is shorter reaction time before repeating EXP-0039. Internal note for EXP-0039: batch 4665 should not be reused."
+ },
+ {
+  "id": "EXP-0040",
+  "title": "reductive amination failure with zinc triflate (EXP-0040)",
+  "text": "EXP-0040 attempted reductive amination of a nitroarene using zinc triflate at 50 C for 21 hours. The isolated yield was only 22 percent. The main failure cause was ligand degradation. Recommended next step is shorter reaction time before repeating EXP-0040. Internal note for EXP-0040: batch 2510 should not be reused."
+ },
+ {
+  "id": "EXP-0041",
+  "title": "Grignard addition failure with palladium acetate (EXP-0041)",
+  "text": "EXP-0041 attempted Grignard addition of a benzylic alcohol using palladium acetate at 130 C for 25 hours. The isolated yield was only 1 percent. The main failure cause was unexpected dimerisation. Recommended next step is microwave heating before repeating EXP-0041. Internal note for EXP-0041: batch 6431 should not be reused."
+ },
+ {
+  "id": "EXP-0042",
+  "title": "Sonogashira coupling failure with iron oxalate (EXP-0042)",
+  "text": "EXP-0042 attempted Sonogashira coupling of a heteroaryl chloride using iron oxalate at 35 C for 17 hours. The isolated yield was only 5 percent. The main failure cause was moisture ingress. Recommended next step is slower reagent addition before repeating EXP-0042. Internal note for EXP-0042: batch 5455 should not be reused."
+ },
+ {
+  "id": "EXP-0043",
+  "title": "Suzuki coupling failure with copper iodide (EXP-0043)",
+  "text": "EXP-0043 attempted Suzuki coupling of a vinyl triflate using copper iodide at 125 C for 26 hours. The isolated yield was only 16 percent. The main failure cause was competing side reaction. Recommended next step is shorter reaction time before repeating EXP-0043. Internal note for EXP-0043: batch 3447 should not be reused."
+ },
+ {
+  "id": "EXP-0044",
+  "title": "Sonogashira coupling failure with rhodium hydride (EXP-0044)",
+  "text": "EXP-0044 attempted Sonogashira coupling of a benzylic alcohol using rhodium hydride at 25 C for 28 hours. The isolated yield was only 11 percent. The main failure cause was moisture ingress. Recommended next step is higher dilution before repeating EXP-0044. Internal note for EXP-0044: batch 2186 should not be reused."
+ },
+ {
+  "id": "EXP-0045",
+  "title": "Heck reaction failure with palladium acetate (EXP-0045)",
+  "text": "EXP-0045 attempted Heck reaction of a heteroaryl chloride using palladium acetate at 115 C for 5 hours. The isolated yield was only 14 percent. The main failure cause was product decomposition. Recommended next step is dry solvent before repeating EXP-0045. Internal note for EXP-0045: batch 5332 should not be reused."
+ },
+ {
+  "id": "EXP-0046",
+  "title": "Buchwald amination failure with rhodium hydride (EXP-0046)",
+  "text": "EXP-0046 attempted Buchwald amination of a aryl bromide using rhodium hydride at 60 C for 3 hours. The isolated yield was only 8 percent. The main failure cause was ligand degradation. Recommended next step is shorter reaction time before repeating EXP-0046. Internal note for EXP-0046: batch 9632 should not be reused."
+ },
+ {
+  "id": "EXP-0047",
+  "title": "aldol condensation failure with nickel chloride (EXP-0047)",
+  "text": "EXP-0047 attempted aldol condensation of a aliphatic aldehyde using nickel chloride at 45 C for 20 hours. The isolated yield was only 12 percent. The main failure cause was product decomposition. Recommended next step is lower temperature before repeating EXP-0047. Internal note for EXP-0047: batch 5997 should not be reused."
+ },
+ {
+  "id": "EXP-0048",
+  "title": "Sonogashira coupling failure with ruthenium complex (EXP-0048)",
+  "text": "EXP-0048 attempted Sonogashira coupling of a vinyl triflate using ruthenium complex at 60 C for 2 hours. The isolated yield was only 22 percent. The main failure cause was unexpected dimerisation. Recommended next step is alternative ligand before repeating EXP-0048. Internal note for EXP-0048: batch 5103 should not be reused."
+ },
+ {
+  "id": "EXP-0049",
+  "title": "Suzuki coupling failure with palladium acetate (EXP-0049)",
+  "text": "EXP-0049 attempted Suzuki coupling of a aryl bromide using palladium acetate at 55 C for 7 hours. The isolated yield was only 28 percent. The main failure cause was poor solubility. Recommended next step is microwave heating before repeating EXP-0049. Internal note for EXP-0049: batch 8080 should not be reused."
+ },
+ {
+  "id": "EXP-0050",
+  "title": "hydrogenation failure with zinc triflate (EXP-0050)",
+  "text": "EXP-0050 attempted hydrogenation of a vinyl triflate using zinc triflate at 70 C for 46 hours. The isolated yield was only 12 percent. The main failure cause was poor solubility. Recommended next step is slower reagent addition before repeating EXP-0050. Internal note for EXP-0050: batch 3289 should not be reused."
+ },
+ {
+  "id": "EXP-0051",
+  "title": "esterification failure with platinum black (EXP-0051)",
+  "text": "EXP-0051 attempted esterification of a aryl bromide using platinum black at 30 C for 28 hours. The isolated yield was only 16 percent. The main failure cause was competing side reaction. Recommended next step is lower temperature before repeating EXP-0051. Internal note for EXP-0051: batch 3674 should not be reused."
+ },
+ {
+  "id": "EXP-0052",
+  "title": "Suzuki coupling failure with nickel chloride (EXP-0052)",
+  "text": "EXP-0052 attempted Suzuki coupling of a nitroarene using nickel chloride at 130 C for 3 hours. The isolated yield was only 18 percent. The main failure cause was product decomposition. Recommended next step is slower reagent addition before repeating EXP-0052. Internal note for EXP-0052: batch 8527 should not be reused."
+ },
+ {
+  "id": "EXP-0053",
+  "title": "reductive amination failure with copper iodide (EXP-0053)",
+  "text": "EXP-0053 attempted reductive amination of a vinyl triflate using copper iodide at 60 C for 22 hours. The isolated yield was only 23 percent. The main failure cause was unexpected dimerisation. Recommended next step is lower temperature before repeating EXP-0053. Internal note for EXP-0053: batch 9963 should not be reused."
+ },
+ {
+  "id": "EXP-0054",
+  "title": "Grignard addition failure with ruthenium complex (EXP-0054)",
+  "text": "EXP-0054 attempted Grignard addition of a aryl bromide using ruthenium complex at 75 C for 1 hours. The isolated yield was only 11 percent. The main failure cause was product decomposition. Recommended next step is slower reagent addition before repeating EXP-0054. Internal note for EXP-0054: batch 6494 should not be reused."
+ },
+ {
+  "id": "EXP-0055",
+  "title": "esterification failure with nickel chloride (EXP-0055)",
+  "text": "EXP-0055 attempted esterification of a alkyl iodide using nickel chloride at 55 C for 1 hours. The isolated yield was only 32 percent. The main failure cause was product decomposition. Recommended next step is slower reagent addition before repeating EXP-0055. Internal note for EXP-0055: batch 2488 should not be reused."
+ },
+ {
+  "id": "EXP-0056",
+  "title": "Heck reaction failure with nickel chloride (EXP-0056)",
+  "text": "EXP-0056 attempted Heck reaction of a aliphatic aldehyde using nickel chloride at 80 C for 20 hours. The isolated yield was only 1 percent. The main failure cause was incomplete conversion. Recommended next step is lower temperature before repeating EXP-0056. Internal note for EXP-0056: batch 5984 should not be reused."
+ },
+ {
+  "id": "EXP-0057",
+  "title": "aldol condensation failure with nickel chloride (EXP-0057)",
+  "text": "EXP-0057 attempted aldol condensation of a aliphatic aldehyde using nickel chloride at 135 C for 10 hours. The isolated yield was only 31 percent. The main failure cause was incomplete conversion. Recommended next step is different base before repeating EXP-0057. Internal note for EXP-0057: batch 5655 should not be reused."
+ },
+ {
+  "id": "EXP-0058",
+  "title": "epoxidation failure with copper iodide (EXP-0058)",
+  "text": "EXP-0058 attempted epoxidation of a aryl bromide using copper iodide at 100 C for 37 hours. The isolated yield was only 32 percent. The main failure cause was incomplete conversion. Recommended next step is alternative ligand before repeating EXP-0058. Internal note for EXP-0058: batch 1263 should not be reused."
+ },
+ {
+  "id": "EXP-0059",
+  "title": "epoxidation failure with ruthenium complex (EXP-0059)",
+  "text": "EXP-0059 attempted epoxidation of a heteroaryl chloride using ruthenium complex at 40 C for 7 hours. The isolated yield was only 23 percent. The main failure cause was catalyst deactivation. Recommended next step is lower temperature before repeating EXP-0059. Internal note for EXP-0059: batch 7170 should not be reused."
+ },
+ {
+  "id": "EXP-0060",
+  "title": "hydrogenation failure with palladium acetate (EXP-0060)",
+  "text": "EXP-0060 attempted hydrogenation of a aryl bromide using palladium acetate at 60 C for 30 hours. The isolated yield was only 0 percent. The main failure cause was poor solubility. Recommended next step is microwave heating before repeating EXP-0060. Internal note for EXP-0060: batch 2148 should not be reused."
+ },
+ {
+  "id": "EXP-0061",
+  "title": "Sonogashira coupling failure with nickel chloride (EXP-0061)",
+  "text": "EXP-0061 attempted Sonogashira coupling of a heteroaryl chloride using nickel chloride at 30 C for 16 hours. The isolated yield was only 16 percent. The main failure cause was unexpected dimerisation. Recommended next step is higher dilution before repeating EXP-0061. Internal note for EXP-0061: batch 4362 should not be reused."
+ },
+ {
+  "id": "EXP-0062",
+  "title": "aldol condensation failure with rhodium hydride (EXP-0062)",
+  "text": "EXP-0062 attempted aldol condensation of a alkyl iodide using rhodium hydride at 95 C for 3 hours. The isolated yield was only 18 percent. The main failure cause was incomplete conversion. Recommended next step is dry solvent before repeating EXP-0062. Internal note for EXP-0062: batch 4248 should not be reused."
+ },
+ {
+  "id": "EXP-0063",
+  "title": "Buchwald amination failure with copper iodide (EXP-0063)",
+  "text": "EXP-0063 attempted Buchwald amination of a benzylic alcohol using copper iodide at 115 C for 1 hours. The isolated yield was only 8 percent. The main failure cause was product decomposition. Recommended next step is higher dilution before repeating EXP-0063. Internal note for EXP-0063: batch 8903 should not be reused."
+ },
+ {
+  "id": "EXP-0064",
+  "title": "Suzuki coupling failure with rhodium hydride (EXP-0064)",
+  "text": "EXP-0064 attempted Suzuki coupling of a vinyl triflate using rhodium hydride at 125 C for 19 hours. The isolated yield was only 31 percent. The main failure cause was moisture ingress. Recommended next step is slower reagent addition before repeating EXP-0064. Internal note for EXP-0064: batch 9462 should not be reused."
+ },
+ {
+  "id": "EXP-0065",
+  "title": "Heck reaction failure with rhodium hydride (EXP-0065)",
+  "text": "EXP-0065 attempted Heck reaction of a alkyl iodide using rhodium hydride at 105 C for 20 hours. The isolated yield was only 12 percent. The main failure cause was unexpected dimerisation. Recommended next step is dry solvent before repeating EXP-0065. Internal note for EXP-0065: batch 2406 should not be reused."
+ },
+ {
+  "id": "EXP-0066",
+  "title": "hydrogenation failure with palladium acetate (EXP-0066)",
+  "text": "EXP-0066 attempted hydrogenation of a vinyl triflate using palladium acetate at 100 C for 18 hours. The isolated yield was only 28 percent. The main failure cause was unexpected dimerisation. Recommended next step is dry solvent before repeating EXP-0066. Internal note for EXP-0066: batch 7338 should not be reused."
+ },
+ {
+  "id": "EXP-0067",
+  "title": "aldol condensation failure with ruthenium complex (EXP-0067)",
+  "text": "EXP-0067 attempted aldol condensation of a heteroaryl chloride using ruthenium complex at 135 C for 17 hours. The isolated yield was only 33 percent. The main failure cause was moisture ingress. Recommended next step is alternative ligand before repeating EXP-0067. Internal note for EXP-0067: batch 6890 should not be reused."
+ },
+ {
+  "id": "EXP-0068",
+  "title": "reductive amination failure with iron oxalate (EXP-0068)",
+  "text": "EXP-0068 attempted reductive amination of a heteroaryl chloride using iron oxalate at 95 C for 26 hours. The isolated yield was only 31 percent. The main failure cause was ligand degradation. Recommended next step is slower reagent addition before repeating EXP-0068. Internal note for EXP-0068: batch 1406 should not be reused."
+ },
+ {
+  "id": "EXP-0069",
+  "title": "reductive amination failure with palladium acetate (EXP-0069)",
+  "text": "EXP-0069 attempted reductive amination of a alkyl iodide using palladium acetate at 65 C for 27 hours. The isolated yield was only 9 percent. The main failure cause was unexpected dimerisation. Recommended next step is shorter reaction time before repeating EXP-0069. Internal note for EXP-0069: batch 6635 should not be reused."
+ },
+ {
+  "id": "EXP-0070",
+  "title": "esterification failure with platinum black (EXP-0070)",
+  "text": "EXP-0070 attempted esterification of a heteroaryl chloride using platinum black at 70 C for 26 hours. The isolated yield was only 21 percent. The main failure cause was ligand degradation. Recommended next step is lower temperature before repeating EXP-0070. Internal note for EXP-0070: batch 2966 should not be reused."
+ },
+ {
+  "id": "EXP-0071",
+  "title": "aldol condensation failure with palladium acetate (EXP-0071)",
+  "text": "EXP-0071 attempted aldol condensation of a vinyl triflate using palladium acetate at 30 C for 25 hours. The isolated yield was only 25 percent. The main failure cause was product decomposition. Recommended next step is different base before repeating EXP-0071. Internal note for EXP-0071: batch 2251 should not be reused."
+ },
+ {
+  "id": "EXP-0072",
+  "title": "Grignard addition failure with zinc triflate (EXP-0072)",
+  "text": "EXP-0072 attempted Grignard addition of a vinyl triflate using zinc triflate at 35 C for 43 hours. The isolated yield was only 3 percent. The main failure cause was catalyst deactivation. Recommended next step is higher dilution before repeating EXP-0072. Internal note for EXP-0072: batch 5679 should not be reused."
+ },
+ {
+  "id": "EXP-0073",
+  "title": "reductive amination failure with ruthenium complex (EXP-0073)",
+  "text": "EXP-0073 attempted reductive amination of a vinyl triflate using ruthenium complex at 50 C for 28 hours. The isolated yield was only 23 percent. The main failure cause was incomplete conversion. Recommended next step is different base before repeating EXP-0073. Internal note for EXP-0073: batch 1475 should not be reused."
+ },
+ {
+  "id": "EXP-0074",
+  "title": "esterification failure with ruthenium complex (EXP-0074)",
+  "text": "EXP-0074 attempted esterification of a heteroaryl chloride using ruthenium complex at 90 C for 42 hours. The isolated yield was only 8 percent. The main failure cause was catalyst deactivation. Recommended next step is shorter reaction time before repeating EXP-0074. Internal note for EXP-0074: batch 5689 should not be reused."
+ },
+ {
+  "id": "EXP-0075",
+  "title": "hydrogenation failure with palladium acetate (EXP-0075)",
+  "text": "EXP-0075 attempted hydrogenation of a aliphatic aldehyde using palladium acetate at 85 C for 19 hours. The isolated yield was only 21 percent. The main failure cause was competing side reaction. Recommended next step is microwave heating before repeating EXP-0075. Internal note for EXP-0075: batch 5878 should not be reused."
+ },
+ {
+  "id": "EXP-0076",
+  "title": "Heck reaction failure with iron oxalate (EXP-0076)",
+  "text": "EXP-0076 attempted Heck reaction of a nitroarene using iron oxalate at 95 C for 8 hours. The isolated yield was only 25 percent. The main failure cause was poor solubility. Recommended next step is higher dilution before repeating EXP-0076. Internal note for EXP-0076: batch 3741 should not be reused."
+ },
+ {
+  "id": "EXP-0077",
+  "title": "reductive amination failure with nickel chloride (EXP-0077)",
+  "text": "EXP-0077 attempted reductive amination of a secondary amine using nickel chloride at 90 C for 29 hours. The isolated yield was only 21 percent. The main failure cause was unexpected dimerisation. Recommended next step is slower reagent addition before repeating EXP-0077. Internal note for EXP-0077: batch 8002 should not be reused."
+ },
+ {
+  "id": "EXP-0078",
+  "title": "reductive amination failure with ruthenium complex (EXP-0078)",
+  "text": "EXP-0078 attempted reductive amination of a secondary amine using ruthenium complex at 70 C for 21 hours. The isolated yield was only 5 percent. The main failure cause was moisture ingress. Recommended next step is alternative ligand before repeating EXP-0078. Internal note for EXP-0078: batch 4917 should not be reused."
+ },
+ {
+  "id": "EXP-0079",
+  "title": "Grignard addition failure with iron oxalate (EXP-0079)",
+  "text": "EXP-0079 attempted Grignard addition of a secondary amine using iron oxalate at 80 C for 34 hours. The isolated yield was only 26 percent. The main failure cause was catalyst deactivation. Recommended next step is shorter reaction time before repeating EXP-0079. Internal note for EXP-0079: batch 4440 should not be reused."
+ },
+ {
+  "id": "EXP-0080",
+  "title": "esterification failure with iron oxalate (EXP-0080)",
+  "text": "EXP-0080 attempted esterification of a benzylic alcohol using iron oxalate at 60 C for 9 hours. The isolated yield was only 23 percent. The main failure cause was catalyst deactivation. Recommended next step is microwave heating before repeating EXP-0080. Internal note for EXP-0080: batch 9247 should not be reused."
+ },
+ {
+  "id": "EXP-0081",
+  "title": "Sonogashira coupling failure with ruthenium complex (EXP-0081)",
+  "text": "EXP-0081 attempted Sonogashira coupling of a heteroaryl chloride using ruthenium complex at 80 C for 42 hours. The isolated yield was only 25 percent. The main failure cause was product decomposition. Recommended next step is slower reagent addition before repeating EXP-0081. Internal note for EXP-0081: batch 8304 should not be reused."
+ },
+ {
+  "id": "EXP-0082",
+  "title": "esterification failure with iron oxalate (EXP-0082)",
+  "text": "EXP-0082 attempted esterification of a aryl bromide using iron oxalate at 85 C for 38 hours. The isolated yield was only 30 percent. The main failure cause was competing side reaction. Recommended next step is lower temperature before repeating EXP-0082. Internal note for EXP-0082: batch 9025 should not be reused."
+ },
+ {
+  "id": "EXP-0083",
+  "title": "Suzuki coupling failure with nickel chloride (EXP-0083)",
+  "text": "EXP-0083 attempted Suzuki coupling of a nitroarene using nickel chloride at 55 C for 15 hours. The isolated yield was only 6 percent. The main failure cause was unexpected dimerisation. Recommended next step is microwave heating before repeating EXP-0083. Internal note for EXP-0083: batch 3529 should not be reused."
+ },
+ {
+  "id": "EXP-0084",
+  "title": "reductive amination failure with nickel chloride (EXP-0084)",
+  "text": "EXP-0084 attempted reductive amination of a alkyl iodide using nickel chloride at 20 C for 15 hours. The isolated yield was only 8 percent. The main failure cause was moisture ingress. Recommended next step is lower temperature before repeating EXP-0084. Internal note for EXP-0084: batch 1615 should not be reused."
+ },
+ {
+  "id": "EXP-0085",
+  "title": "Heck reaction failure with copper iodide (EXP-0085)",
+  "text": "EXP-0085 attempted Heck reaction of a vinyl triflate using copper iodide at 35 C for 20 hours. The isolated yield was only 4 percent. The main failure cause was incomplete conversion. Recommended next step is dry solvent before repeating EXP-0085. Internal note for EXP-0085: batch 9592 should not be reused."
+ },
+ {
+  "id": "EXP-0086",
+  "title": "epoxidation failure with ruthenium complex (EXP-0086)",
+  "text": "EXP-0086 attempted epoxidation of a nitroarene using ruthenium complex at 115 C for 1 hours. The isolated yield was only 0 percent. The main failure cause was product decomposition. Recommended next step is slower reagent addition before repeating EXP-0086. Internal note for EXP-0086: batch 9806 should not be reused."
+ },
+ {
+  "id": "EXP-0087",
+  "title": "Heck reaction failure with rhodium hydride (EXP-0087)",
+  "text": "EXP-0087 attempted Heck reaction of a vinyl triflate using rhodium hydride at 95 C for 16 hours. The isolated yield was only 33 percent. The main failure cause was ligand degradation. Recommended next step is slower reagent addition before repeating EXP-0087. Internal note for EXP-0087: batch 9962 should not be reused."
+ },
+ {
+  "id": "EXP-0088",
+  "title": "aldol condensation failure with palladium acetate (EXP-0088)",
+  "text": "EXP-0088 attempted aldol condensation of a nitroarene using palladium acetate at 20 C for 32 hours. The isolated yield was only 12 percent. The main failure cause was product decomposition. Recommended next step is lower temperature before repeating EXP-0088. Internal note for EXP-0088: batch 7881 should not be reused."
+ },
+ {
+  "id": "EXP-0089",
+  "title": "Buchwald amination failure with iron oxalate (EXP-0089)",
+  "text": "EXP-0089 attempted Buchwald amination of a secondary amine using iron oxalate at 55 C for 3 hours. The isolated yield was only 31 percent. The main failure cause was incomplete conversion. Recommended next step is different base before repeating EXP-0089. Internal note for EXP-0089: batch 6538 should not be reused."
+ },
+ {
+  "id": "EXP-0090",
+  "title": "esterification failure with platinum black (EXP-0090)",
+  "text": "EXP-0090 attempted esterification of a nitroarene using platinum black at 65 C for 5 hours. The isolated yield was only 32 percent. The main failure cause was poor solubility. Recommended next step is lower temperature before repeating EXP-0090. Internal note for EXP-0090: batch 4362 should not be reused."
+ },
+ {
+  "id": "EXP-0091",
+  "title": "hydrogenation failure with ruthenium complex (EXP-0091)",
+  "text": "EXP-0091 attempted hydrogenation of a vinyl triflate using ruthenium complex at 90 C for 17 hours. The isolated yield was only 14 percent. The main failure cause was poor solubility. Recommended next step is slower reagent addition before repeating EXP-0091. Internal note for EXP-0091: batch 5832 should not be reused."
+ },
+ {
+  "id": "EXP-0092",
+  "title": "Buchwald amination failure with rhodium hydride (EXP-0092)",
+  "text": "EXP-0092 attempted Buchwald amination of a aliphatic aldehyde using rhodium hydride at 85 C for 39 hours. The isolated yield was only 3 percent. The main failure cause was poor solubility. Recommended next step is microwave heating before repeating EXP-0092. Internal note for EXP-0092: batch 3398 should not be reused."
+ },
+ {
+  "id": "EXP-0093",
+  "title": "esterification failure with palladium acetate (EXP-0093)",
+  "text": "EXP-0093 attempted esterification of a secondary amine using palladium acetate at 85 C for 46 hours. The isolated yield was only 3 percent. The main failure cause was catalyst deactivation. Recommended next step is alternative ligand before repeating EXP-0093. Internal note for EXP-0093: batch 1985 should not be reused."
+ },
+ {
+  "id": "EXP-0094",
+  "title": "reductive amination failure with zinc triflate (EXP-0094)",
+  "text": "EXP-0094 attempted reductive amination of a alkyl iodide using zinc triflate at 30 C for 22 hours. The isolated yield was only 10 percent. The main failure cause was ligand degradation. Recommended next step is dry solvent before repeating EXP-0094. Internal note for EXP-0094: batch 4124 should not be reused."
+ },
+ {
+  "id": "EXP-0095",
+  "title": "reductive amination failure with rhodium hydride (EXP-0095)",
+  "text": "EXP-0095 attempted reductive amination of a aryl bromide using rhodium hydride at 75 C for 29 hours. The isolated yield was only 21 percent. The main failure cause was product decomposition. Recommended next step is shorter reaction time before repeating EXP-0095. Internal note for EXP-0095: batch 3773 should not be reused."
+ },
+ {
+  "id": "EXP-0096",
+  "title": "Buchwald amination failure with palladium acetate (EXP-0096)",
+  "text": "EXP-0096 attempted Buchwald amination of a heteroaryl chloride using palladium acetate at 75 C for 8 hours. The isolated yield was only 26 percent. The main failure cause was product decomposition. Recommended next step is dry solvent before repeating EXP-0096. Internal note for EXP-0096: batch 4398 should not be reused."
+ },
+ {
+  "id": "EXP-0097",
+  "title": "esterification failure with platinum black (EXP-0097)",
+  "text": "EXP-0097 attempted esterification of a vinyl triflate using platinum black at 25 C for 13 hours. The isolated yield was only 30 percent. The main failure cause was incomplete conversion. Recommended next step is dry solvent before repeating EXP-0097. Internal note for EXP-0097: batch 7106 should not be reused."
+ },
+ {
+  "id": "EXP-0098",
+  "title": "Sonogashira coupling failure with rhodium hydride (EXP-0098)",
+  "text": "EXP-0098 attempted Sonogashira coupling of a secondary amine using rhodium hydride at 135 C for 2 hours. The isolated yield was only 30 percent. The main failure cause was ligand degradation. Recommended next step is different base before repeating EXP-0098. Internal note for EXP-0098: batch 7730 should not be reused."
+ },
+ {
+  "id": "EXP-0099",
+  "title": "aldol condensation failure with zinc triflate (EXP-0099)",
+  "text": "EXP-0099 attempted aldol condensation of a aryl bromide using zinc triflate at 90 C for 4 hours. The isolated yield was only 4 percent. The main failure cause was incomplete conversion. Recommended next step is lower temperature before repeating EXP-0099. Internal note for EXP-0099: batch 5210 should not be reused."
+ },
+ {
+  "id": "EXP-0100",
+  "title": "aldol condensation failure with nickel chloride (EXP-0100)",
+  "text": "EXP-0100 attempted aldol condensation of a benzylic alcohol using nickel chloride at 70 C for 17 hours. The isolated yield was only 2 percent. The main failure cause was ligand degradation. Recommended next step is higher dilution before repeating EXP-0100. Internal note for EXP-0100: batch 6185 should not be reused."
+ },
+ {
+  "id": "EXP-0101",
+  "title": "Heck reaction failure with iron oxalate (EXP-0101)",
+  "text": "EXP-0101 attempted Heck reaction of a aryl bromide using iron oxalate at 55 C for 31 hours. The isolated yield was only 6 percent. The main failure cause was moisture ingress. Recommended next step is lower temperature before repeating EXP-0101. Internal note for EXP-0101: batch 8630 should not be reused."
+ },
+ {
+  "id": "EXP-0102",
+  "title": "esterification failure with iron oxalate (EXP-0102)",
+  "text": "EXP-0102 attempted esterification of a nitroarene using iron oxalate at 95 C for 1 hours. The isolated yield was only 11 percent. The main failure cause was unexpected dimerisation. Recommended next step is alternative ligand before repeating EXP-0102. Internal note for EXP-0102: batch 5969 should not be reused."
+ },
+ {
+  "id": "EXP-0103",
+  "title": "reductive amination failure with ruthenium complex (EXP-0103)",
+  "text": "EXP-0103 attempted reductive amination of a benzylic alcohol using ruthenium complex at 75 C for 33 hours. The isolated yield was only 5 percent. The main failure cause was ligand degradation. Recommended next step is microwave heating before repeating EXP-0103. Internal note for EXP-0103: batch 4232 should not be reused."
+ },
+ {
+  "id": "EXP-0104",
+  "title": "esterification failure with copper iodide (EXP-0104)",
+  "text": "EXP-0104 attempted esterification of a secondary amine using copper iodide at 120 C for 31 hours. The isolated yield was only 2 percent. The main failure cause was incomplete conversion. Recommended next step is dry solvent before repeating EXP-0104. Internal note for EXP-0104: batch 9922 should not be reused."
+ },
+ {
+  "id": "EXP-0105",
+  "title": "Grignard addition failure with copper iodide (EXP-0105)",
+  "text": "EXP-0105 attempted Grignard addition of a nitroarene using copper iodide at 60 C for 14 hours. The isolated yield was only 5 percent. The main failure cause was moisture ingress. Recommended next step is dry solvent before repeating EXP-0105. Internal note for EXP-0105: batch 2579 should not be reused."
+ },
+ {
+  "id": "EXP-0106",
+  "title": "esterification failure with rhodium hydride (EXP-0106)",
+  "text": "EXP-0106 attempted esterification of a alkyl iodide using rhodium hydride at 40 C for 30 hours. The isolated yield was only 26 percent. The main failure cause was competing side reaction. Recommended next step is slower reagent addition before repeating EXP-0106. Internal note for EXP-0106: batch 4849 should not be reused."
+ },
+ {
+  "id": "EXP-0107",
+  "title": "Sonogashira coupling failure with nickel chloride (EXP-0107)",
+  "text": "EXP-0107 attempted Sonogashira coupling of a vinyl triflate using nickel chloride at 110 C for 24 hours. The isolated yield was only 17 percent. The main failure cause was product decomposition. Recommended next step is higher dilution before repeating EXP-0107. Internal note for EXP-0107: batch 5162 should not be reused."
+ },
+ {
+  "id": "EXP-0108",
+  "title": "Heck reaction failure with ruthenium complex (EXP-0108)",
+  "text": "EXP-0108 attempted Heck reaction of a alkyl iodide using ruthenium complex at 55 C for 10 hours. The isolated yield was only 15 percent. The main failure cause was poor solubility. Recommended next step is alternative ligand before repeating EXP-0108. Internal note for EXP-0108: batch 5609 should not be reused."
+ },
+ {
+  "id": "EXP-0109",
+  "title": "epoxidation failure with ruthenium complex (EXP-0109)",
+  "text": "EXP-0109 attempted epoxidation of a benzylic alcohol using ruthenium complex at 60 C for 33 hours. The isolated yield was only 15 percent. The main failure cause was moisture ingress. Recommended next step is shorter reaction time before repeating EXP-0109. Internal note for EXP-0109: batch 9623 should not be reused."
+ },
+ {
+  "id": "EXP-0110",
+  "title": "aldol condensation failure with nickel chloride (EXP-0110)",
+  "text": "EXP-0110 attempted aldol condensation of a alkyl iodide using nickel chloride at 20 C for 15 hours. The isolated yield was only 30 percent. The main failure cause was catalyst deactivation. Recommended next step is dry solvent before repeating EXP-0110. Internal note for EXP-0110: batch 8344 should not be reused."
+ },
+ {
+  "id": "EXP-0111",
+  "title": "Grignard addition failure with palladium acetate (EXP-0111)",
+  "text": "EXP-0111 attempted Grignard addition of a vinyl triflate using palladium acetate at 25 C for 39 hours. The isolated yield was only 12 percent. The main failure cause was poor solubility. Recommended next step is dry solvent before repeating EXP-0111. Internal note for EXP-0111: batch 4181 should not be reused."
+ },
+ {
+  "id": "EXP-0112",
+  "title": "Buchwald amination failure with platinum black (EXP-0112)",
+  "text": "EXP-0112 attempted Buchwald amination of a aliphatic aldehyde using platinum black at 125 C for 7 hours. The isolated yield was only 0 percent. The main failure cause was unexpected dimerisation. Recommended next step is higher dilution before repeating EXP-0112. Internal note for EXP-0112: batch 6729 should not be reused."
+ },
+ {
+  "id": "EXP-0113",
+  "title": "aldol condensation failure with palladium acetate (EXP-0113)",
+  "text": "EXP-0113 attempted aldol condensation of a benzylic alcohol using palladium acetate at 25 C for 17 hours. The isolated yield was only 13 percent. The main failure cause was ligand degradation. Recommended next step is alternative ligand before repeating EXP-0113. Internal note for EXP-0113: batch 1626 should not be reused."
+ },
+ {
+  "id": "EXP-0114",
+  "title": "epoxidation failure with ruthenium complex (EXP-0114)",
+  "text": "EXP-0114 attempted epoxidation of a aryl bromide using ruthenium complex at 125 C for 12 hours. The isolated yield was only 23 percent. The main failure cause was ligand degradation. Recommended next step is shorter reaction time before repeating EXP-0114. Internal note for EXP-0114: batch 6115 should not be reused."
+ },
+ {
+  "id": "EXP-0115",
+  "title": "Buchwald amination failure with ruthenium complex (EXP-0115)",
+  "text": "EXP-0115 attempted Buchwald amination of a aryl bromide using ruthenium complex at 30 C for 7 hours. The isolated yield was only 26 percent. The main failure cause was unexpected dimerisation. Recommended next step is microwave heating before repeating EXP-0115. Internal note for EXP-0115: batch 7476 should not be reused."
+ },
+ {
+  "id": "EXP-0116",
+  "title": "Sonogashira coupling failure with copper iodide (EXP-0116)",
+  "text": "EXP-0116 attempted Sonogashira coupling of a heteroaryl chloride using copper iodide at 130 C for 27 hours. The isolated yield was only 17 percent. The main failure cause was competing side reaction. Recommended next step is shorter reaction time before repeating EXP-0116. Internal note for EXP-0116: batch 5641 should not be reused."
+ },
+ {
+  "id": "EXP-0117",
+  "title": "Heck reaction failure with zinc triflate (EXP-0117)",
+  "text": "EXP-0117 attempted Heck reaction of a aryl bromide using zinc triflate at 85 C for 2 hours. The isolated yield was only 26 percent. The main failure cause was product decomposition. Recommended next step is different base before repeating EXP-0117. Internal note for EXP-0117: batch 6960 should not be reused."
+ },
+ {
+  "id": "EXP-0118",
+  "title": "aldol condensation failure with zinc triflate (EXP-0118)",
+  "text": "EXP-0118 attempted aldol condensation of a nitroarene using zinc triflate at 85 C for 28 hours. The isolated yield was only 10 percent. The main failure cause was poor solubility. Recommended next step is lower temperature before repeating EXP-0118. Internal note for EXP-0118: batch 2860 should not be reused."
+ },
+ {
+  "id": "EXP-0119",
+  "title": "Buchwald amination failure with zinc triflate (EXP-0119)",
+  "text": "EXP-0119 attempted Buchwald amination of a benzylic alcohol using zinc triflate at 40 C for 4 hours. The isolated yield was only 0 percent. The main failure cause was unexpected dimerisation. Recommended next step is alternative ligand before repeating EXP-0119. Internal note for EXP-0119: batch 3334 should not be reused."
+ }
+]

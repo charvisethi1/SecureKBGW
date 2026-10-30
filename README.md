@@ -52,6 +52,17 @@ From a shell, one department at a time:
 
 `run.sh` uses your Claude subscription login and writes a log to `logs/`. Set `USE_API_KEY=1` to use an API key instead. Python dependencies are managed with `uv` (see `pyproject.toml`).
 
+## MVP prototype
+
+`gateway/` is a seller-hosted, metered query gateway exposed as an MCP server, tested on synthetic data only. Results and limits are in [`research/mvp-results.md`](research/mvp-results.md).
+
+```bash
+.venv/bin/python scripts/make_synthetic_kb.py 120 > data/synthetic_kb.json   # generate test data
+.venv/bin/python -m unittest discover -s tests -t .                          # run tests
+.venv/bin/python -m attack.run                                               # extraction attack benchmark
+SKBGW_BUYER_KEY=demo-key .venv/bin/python -m gateway.mcp_server              # serve over MCP (stdio)
+```
+
 ## Next step
 
 The remaining questions can't be settled from the desk. `findings/outreach-drafts.md` has interview requests and questions for eight buyer and seller types, written to test the kill criteria. Review and edit them before any outreach.
