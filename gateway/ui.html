@@ -1,0 +1,451 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Secure KB Gateway</title>
+<style>
+  :root {
+    --bg: #f4f5f7; --card: #ffffff; --ink: #12161c; --muted: #5b6472; --line: #e1e4ea; --soft: #f0f2f5;
+    --accent: #2b4fd8; --accent-ink: #ffffff; --accent-soft: #e8edfd;
+    --ok: #146c43; --ok-bg: #e3f4ea; --neutral: #3e4756; --neutral-bg: #eceef2;
+    --bad: #a12626; --bad-bg: #fde8e8; --warn: #8a4b00; --warn-bg: #fff1d6; --focus: #7c93f5;
+    --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0e1116; --card: #161b22; --ink: #e7eaee; --muted: #9aa4b2; --line: #262d37; --soft: #1c222b;
+      --accent: #8fa8ff; --accent-ink: #0b1020; --accent-soft: #1d2744;
+      --ok: #6edda2; --ok-bg: #12301f; --neutral: #b6bfcc; --neutral-bg: #222934;
+      --bad: #ff9b93; --bad-bg: #3a1714; --warn: #f2b861; --warn-bg: #33260d;
+    }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 15px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, system-ui, sans-serif; }
+  button, input, textarea { font: inherit; color: inherit; }
+  button:focus-visible, input:focus-visible, textarea:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+  .hidden { display: none !important; }
+
+  .top { background: var(--card); border-bottom: 1px solid var(--line); }
+  .top-in { max-width: 1080px; margin: 0 auto; padding: 0 24px; min-height: 60px; display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 650; letter-spacing: -0.01em; }
+  .brand svg { stroke: var(--accent); }
+  nav.tabs { display: flex; gap: 2px; padding: 3px; background: var(--soft); border-radius: 10px; }
+  nav.tabs button { border: 0; cursor: pointer; font-size: 14px; min-height: 36px; padding: 0 14px; border-radius: 8px; background: transparent; color: var(--muted); }
+  nav.tabs button[aria-selected="true"] { background: var(--card); color: var(--ink); font-weight: 600; box-shadow: 0 1px 2px rgba(0,0,0,.12); }
+
+  main { padding: 36px 24px 72px; display: flex; flex-direction: column; gap: 20px; margin: 0 auto; }
+  #buyer { max-width: 880px; width: 100%; } #seller { max-width: 1080px; width: 100%; }
+  section.col { display: flex; flex-direction: column; gap: 20px; }
+  h1 { margin: 0 0 6px; font-size: 28px; line-height: 1.2; font-weight: 650; letter-spacing: -0.02em; }
+  h2 { margin: 0; font-size: 16px; font-weight: 650; }
+  .lede, .hint { color: var(--muted); }
+  .lede { margin: 0; max-width: 560px; }
+  .hint { font-size: 13px; }
+
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 20px; }
+  .stack { display: flex; flex-direction: column; gap: 14px; }
+  .row { display: flex; flex-wrap: wrap; gap: 12px; align-items: flex-end; }
+  .row > .grow { flex: 1 1 180px; min-width: 0; } .row > .narrow { flex: 0 1 110px; }
+  .between { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; }
+  label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+  label .opt { font-weight: 400; color: var(--muted); }
+  input, textarea { width: 100%; padding: 9px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); }
+  textarea { resize: vertical; }
+  input[aria-invalid="true"], textarea[aria-invalid="true"] { border-color: var(--bad); }
+  .btn { cursor: pointer; font-weight: 600; border-radius: 10px; padding: 10px 20px; border: 0; background: var(--accent); color: var(--accent-ink); }
+  .btn:disabled { opacity: .55; cursor: default; }
+  .btn.ghost { background: transparent; color: var(--ink); border: 1px solid var(--line); font-weight: 500; padding: 8px 14px; }
+  .btn.small { font-size: 13px; padding: 6px 12px; border-radius: 8px; }
+  .err { color: var(--bad); font-size: 13px; min-height: 18px; }
+  .okmsg { color: var(--ok); font-size: 13px; }
+
+  .who { display: flex; align-items: center; gap: 12px; }
+  .avatar { width: 38px; height: 38px; border-radius: 50%; background: var(--accent-soft); color: var(--accent); display: flex; align-items: center; justify-content: center; font-weight: 650; flex-shrink: 0; }
+  .mono { font-family: var(--mono); }
+  .meter-top { display: flex; justify-content: space-between; align-items: baseline; font-size: 13px; margin-bottom: 6px; }
+  .meter { height: 8px; border-radius: 999px; background: var(--line); overflow: hidden; }
+  .meter > div { height: 100%; width: 0; background: var(--accent); border-radius: 999px; transition: width .3s; }
+  .meter.low > div { background: var(--warn); } .meter.empty > div { background: var(--bad); }
+  .trust { display: flex; gap: 12px; align-items: flex-start; background: var(--soft); border-radius: 12px; padding: 12px 16px; font-size: 13.5px; color: var(--muted); }
+  .trust svg { flex-shrink: 0; margin-top: 2px; stroke: var(--muted); }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  .chip { font-size: 13px; cursor: pointer; padding: 5px 12px; border-radius: 999px; border: 1px solid var(--line); background: transparent; }
+
+  .item { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px; }
+  .item .q { font-weight: 600; margin-bottom: 10px; overflow-wrap: anywhere; }
+  .answer { background: var(--soft); border-radius: 10px; padding: 12px 14px; white-space: pre-wrap; overflow-wrap: anywhere; }
+  .answer.muted { color: var(--muted); } .answer.bad { background: var(--bad-bg); color: var(--bad); }
+  .answer b { display: block; margin-bottom: 2px; }
+  .meta { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; margin-top: 12px; font-size: 13px; color: var(--muted); }
+  .meta .push { margin-left: auto; display: inline-flex; align-items: center; gap: 6px; }
+  .pill { display: inline-block; padding: 3px 10px; border-radius: 999px; font-size: 12px; font-weight: 600; white-space: nowrap; }
+  .pill.ok { color: var(--ok); background: var(--ok-bg); } .pill.neutral { color: var(--neutral); background: var(--neutral-bg); }
+  .pill.bad { color: var(--bad); background: var(--bad-bg); } .pill.warn { color: var(--warn); background: var(--warn-bg); }
+  .skeleton { height: 46px; border-radius: 10px; background: linear-gradient(90deg, var(--soft), var(--line), var(--soft)); background-size: 200% 100%; animation: shimmer 1.2s linear infinite; }
+  @keyframes shimmer { to { background-position: -200% 0; } }
+  .empty { text-align: center; color: var(--muted); padding: 28px 16px; border: 1px dashed var(--line); border-radius: 14px; }
+
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 14px; }
+  .stat { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 16px 18px; }
+  .stat span { font-size: 13px; color: var(--muted); } .stat b { display: block; font-size: 30px; letter-spacing: -0.02em; line-height: 1.2; }
+  .banner { display: flex; gap: 12px; align-items: flex-start; background: var(--warn-bg); color: var(--warn); border-radius: 12px; padding: 12px 16px; font-size: 14px; }
+  .banner svg { flex-shrink: 0; margin-top: 2px; }
+  .reveal { border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; background: var(--soft); display: flex; flex-direction: column; gap: 10px; }
+  .reveal .warnline { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; color: var(--warn); }
+  .codebox { display: flex; gap: 8px; align-items: stretch; }
+  .codebox code { flex: 1; min-width: 0; font-family: var(--mono); font-size: 12.5px; padding: 9px 12px; border-radius: 8px; background: var(--card); border: 1px solid var(--line); overflow-wrap: anywhere; }
+  .split { display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start; }
+  .split > .a { flex: 1 1 460px; min-width: 0; } .split > .b { flex: 1 1 380px; min-width: 0; display: flex; flex-direction: column; gap: 20px; }
+  .scroll { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th { text-align: left; color: var(--muted); font-size: 13px; font-weight: 600; padding: 8px 6px; border-bottom: 1px solid var(--line); }
+  td { padding: 11px 6px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  tr:last-child td { border-bottom: 0; }
+  .r { text-align: right; }
+
+  @media (max-width: 560px) {
+    main { padding: 20px 16px 48px; } .top-in { padding: 0 16px; } h1 { font-size: 22px; }
+    .card { padding: 16px; } nav.tabs button { min-height: 44px; }
+  }
+  @media (prefers-reduced-motion: reduce) { .meter > div { transition: none; } .skeleton { animation: none; } }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="top-in">
+    <div class="brand">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6l7-3z"/><circle cx="12" cy="11" r="1.6"/><path d="M12 12.6V15"/></svg>
+      <span>Secure KB Gateway</span>
+    </div>
+    <nav class="tabs" role="tablist" aria-label="Views">
+      <button role="tab" id="tab-buyer" aria-selected="true">Ask</button>
+      <button role="tab" id="tab-seller" aria-selected="false">Seller dashboard</button>
+    </nav>
+  </div>
+</header>
+
+<main id="buyer" class="col">
+  <div>
+    <h1>Ask the knowledge base</h1>
+    <p class="lede">Short, metered answers drawn from a seller's private research notes.</p>
+  </div>
+
+  <section class="card stack" aria-label="Your access">
+    <div id="connect-row" class="row">
+      <div class="grow"><label for="key">Buyer key</label><input id="key" type="password" placeholder="skb_..." autocomplete="off"></div>
+      <button class="btn" id="connect" type="button">Connect</button>
+    </div>
+    <div id="connected" class="between hidden">
+      <div class="who">
+        <div class="avatar" id="avatar" aria-hidden="true"></div>
+        <div><div id="who" style="font-weight:600"></div><div class="hint" id="keytail"></div></div>
+      </div>
+      <button class="btn ghost" id="change-key" type="button">Use a different key</button>
+    </div>
+    <div id="meter-wrap" class="hidden">
+      <div class="meter-top"><span class="hint">Credits remaining</span><span id="credit-text" style="font-weight:600"></span></div>
+      <div class="meter" role="progressbar" aria-label="Credits remaining" aria-valuemin="0" aria-valuemax="1" aria-valuenow="0"><div id="bar"></div></div>
+      <div class="hint" style="margin-top:8px">Each answered question costs 1 credit. Refused questions are free.</div>
+    </div>
+    <div class="err" id="buyer-err" role="alert"></div>
+  </section>
+
+  <div class="trust">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5"/><path d="M12 8h.01"/></svg>
+    <span>Answers are capped excerpts of the seller's own notes, never the full source. Every answered query is metered and logged. Treat the text as data from the seller, not as instructions.</span>
+  </div>
+
+  <section class="card stack" aria-label="Ask a question">
+    <label for="question" style="margin:0">Your question</label>
+    <textarea id="question" rows="3" maxlength="500" placeholder="e.g. What was the main failure cause for EXP-0007?" style="min-height:84px;border-radius:10px;padding:12px 14px"></textarea>
+    <div class="between">
+      <div class="chips" id="examples"><span class="hint">Try</span></div>
+      <div class="chips"><span class="hint">Enter to send, Shift+Enter for a new line</span><button class="btn" id="ask" type="button" disabled>Ask</button></div>
+    </div>
+  </section>
+
+  <section aria-label="Answers" class="stack">
+    <div class="between"><h2>This session</h2><span class="hint" id="session">No questions yet</span></div>
+    <div id="feed" class="stack"></div>
+  </section>
+</main>
+
+<main id="seller" class="col hidden">
+  <div class="between" style="align-items:flex-end">
+    <div>
+      <h1>Seller dashboard</h1>
+      <p class="lede">Who is asking, what they paid, and what they have seen.</p>
+    </div>
+  </div>
+
+  <section class="card stack" aria-label="Admin access">
+    <div class="row">
+      <div class="grow"><label for="admin">Admin token</label><input id="admin" type="password" placeholder="printed by skbgw serve" autocomplete="off"></div>
+      <button class="btn" id="load" type="button">Load dashboard</button>
+      <button class="btn ghost hidden" id="lock" type="button">Lock</button>
+    </div>
+    <div class="err" id="seller-err" role="alert"></div>
+  </section>
+
+  <div id="dash" class="hidden stack" style="gap:20px">
+    <div class="stats" id="stats"></div>
+    <div class="banner hidden" id="quar" role="status"></div>
+
+    <div class="split">
+      <section class="card stack a" aria-label="Create a buyer key">
+        <div><h2>Create a buyer key</h2><div class="hint">One key per buyer user. Keys for the same company share query and information limits.</div></div>
+        <div class="row">
+          <div class="grow"><label for="b-name">Buyer name</label><input id="b-name" placeholder="Acme Research"></div>
+          <div class="grow"><label for="b-entity">Company <span class="opt">(shared limits)</span></label><input id="b-entity" placeholder="Same as name"></div>
+          <div class="narrow"><label for="b-credits">Credits</label><input id="b-credits" type="number" value="50" min="0"></div>
+        </div>
+        <div><button class="btn" id="b-add" type="button">Create key</button></div>
+        <div class="err" id="b-err" role="alert"></div>
+        <div id="b-out"></div>
+      </section>
+
+      <div class="b">
+        <section class="card stack" aria-label="Top up credits">
+          <h2>Top up credits</h2>
+          <div class="row">
+            <div class="grow"><label for="t-name">Buyer name</label><input id="t-name"></div>
+            <div class="narrow"><label for="t-credits">Add</label><input id="t-credits" type="number" value="50" min="1"></div>
+            <button class="btn ghost" id="t-add" type="button">Top up</button>
+          </div>
+          <div class="hint" id="t-out" role="status"></div>
+        </section>
+
+        <section class="card stack" aria-label="Add a note">
+          <div><h2>Add a note</h2><div class="hint">Synthetic or consented, non-sensitive text only.</div></div>
+          <div><label for="n-title">Title</label><input id="n-title" placeholder="Gasket leak, pilot batch 12" maxlength="120"></div>
+          <div><label for="n-text">Text</label><textarea id="n-text" rows="4" placeholder="What was tried, what happened, and why." maxlength="20000"></textarea>
+            <div class="hint r" id="n-count">0 / 20,000</div></div>
+          <div><button class="btn" id="n-add" type="button">Add note</button></div>
+          <div class="hint" id="n-out" role="status"></div>
+        </section>
+      </div>
+    </div>
+
+    <section class="card" aria-label="Buyers"><h2 style="margin-bottom:8px">Buyers</h2><div class="scroll" id="buyers"></div></section>
+    <section class="card" aria-label="Recent activity"><h2 style="margin-bottom:8px">Recent activity</h2><div class="scroll" id="recent"></div></section>
+  </div>
+</main>
+
+<script>
+"use strict";
+const $ = id => document.getElementById(id);
+// Build DOM with textContent only: answers and notes are untrusted and must never be parsed as HTML.
+function h(tag, attrs, ...kids) {
+  const e = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs || {})) k === "class" ? e.className = v : e.setAttribute(k, v);
+  for (const k of kids) if (k !== null && k !== undefined) e.append(k instanceof Node ? k : document.createTextNode(String(k)));
+  return e;
+}
+function icon(paths, size) {
+  const s = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+  for (const [k, v] of Object.entries({ width: size || 14, height: size || 14, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor",
+    "stroke-width": 1.8, "stroke-linecap": "round", "stroke-linejoin": "round", "aria-hidden": "true" })) s.setAttribute(k, v);
+  for (const d of paths) {
+    const p = document.createElementNS("http://www.w3.org/2000/svg", "path"); p.setAttribute("d", d); s.append(p);
+  }
+  return s;
+}
+const LOCK = ["M5 11h14v9H5z", "M8 11V8a4 4 0 0 1 8 0v3"];
+const store = {
+  get(k) { try { return sessionStorage.getItem(k) || ""; } catch { return ""; } },
+  set(k, v) { try { v ? sessionStorage.setItem(k, v) : sessionStorage.removeItem(k); } catch {} },
+};
+async function api(path, opts, headers) {
+  try {
+    const r = await fetch(path, { ...opts, headers: { "Content-Type": "application/json", ...headers } });
+    let data = {}; try { data = await r.json(); } catch {}
+    return { ok: r.ok, status: r.status, data };
+  } catch { return { ok: false, status: 0, data: { error: "Could not reach the server." } }; }
+}
+function flash(btn, text, ms) {
+  const old = btn.textContent; btn.textContent = text; setTimeout(() => { btn.textContent = old; }, ms || 1800);
+}
+function copy(txt, btn) {
+  const done = () => flash(btn, "Copied");
+  if (navigator.clipboard) navigator.clipboard.writeText(txt).then(done, () => flash(btn, "Copy failed")); else flash(btn, "Copy failed");
+}
+function invalid(el, on) { if (on) el.setAttribute("aria-invalid", "true"); else el.removeAttribute("aria-invalid"); }
+
+// Tabs
+function show(which) {
+  for (const t of ["buyer", "seller"]) {
+    $(t).classList.toggle("hidden", t !== which);
+    $("tab-" + t).setAttribute("aria-selected", String(t === which));
+  }
+}
+$("tab-buyer").onclick = () => show("buyer");
+$("tab-seller").onclick = () => show("seller");
+
+// ---------- Buyer ----------
+let credits = null, startCredits = 0, asked = 0, spent = 0;
+const bearer = () => ({ Authorization: "Bearer " + $("key").value.trim() });
+function renderMeter() {
+  const meter = $("bar").parentElement, pct = startCredits ? Math.max(0, Math.min(100, 100 * credits / startCredits)) : 0;
+  $("bar").style.width = pct + "%";
+  meter.classList.toggle("low", credits > 0 && pct <= 20); meter.classList.toggle("empty", credits === 0);
+  meter.setAttribute("aria-valuemax", String(startCredits)); meter.setAttribute("aria-valuenow", String(credits));
+  $("credit-text").textContent = credits + " of " + startCredits;
+  $("ask").disabled = credits === 0;
+  if (credits === 0) $("buyer-err").textContent = "You are out of credits. Ask the seller to top up your account.";
+}
+function setConnected(on, name) {
+  $("connect-row").classList.toggle("hidden", on); $("connected").classList.toggle("hidden", !on);
+  $("meter-wrap").classList.toggle("hidden", !on); $("ask").disabled = !on;
+  if (on) {
+    $("who").textContent = name; $("avatar").textContent = (name || "?").trim().charAt(0).toUpperCase();
+    const k = $("key").value.trim(); $("keytail").textContent = "Connected, key ending " + k.slice(-4);
+  }
+}
+async function connect() {
+  $("buyer-err").textContent = ""; invalid($("key"), false);
+  if (!$("key").value.trim()) { invalid($("key"), true); $("buyer-err").textContent = "Paste your buyer key first."; return; }
+  const r = await api("/api/me", {}, bearer());
+  if (!r.ok) { invalid($("key"), true); setConnected(false); $("buyer-err").textContent = r.status === 401 ? "That key was not recognised." : (r.data.error || "Could not connect."); return; }
+  store.set("key", $("key").value.trim());
+  credits = r.data.credits; startCredits = Math.max(startCredits, credits, 1);
+  setConnected(true, r.data.name); renderMeter(); $("question").focus();
+}
+$("change-key").onclick = () => { store.set("key", ""); $("key").value = ""; setConnected(false); $("key").focus(); };
+$("connect").onclick = connect;
+$("key").addEventListener("keydown", e => { if (e.key === "Enter") connect(); });
+
+const REASONS = {
+  "no sufficiently relevant knowledge": ["refused", "Nothing in this knowledge base is relevant enough to answer that. Try naming a specific experiment, reagent or process."],
+  "information budget reached": ["limit", "Information limit reached for your company", "You have seen the most source text this key's company can receive. Ask the seller to raise your limit, or re-ask something you have already seen (that is free)."],
+  "query budget exhausted": ["limit", "Query limit reached for your company", "Your company has used its allowed number of questions. Ask the seller to raise the limit."],
+  "rate limited": ["limit", "Slow down a little", "Questions are limited to a few per second. Wait a moment and ask again."],
+  "insufficient credits": ["limit", "You are out of credits", "Ask the seller to top up your account."],
+  "question too long": ["limit", "Question too long", "Keep questions under 500 characters."],
+};
+function pill(kind, text) { return h("span", { class: "pill " + kind }, text); }
+function feedItem(q, body, meta) { return h("article", { class: "item" }, h("div", { class: "q" }, q), body, meta); }
+function updateSession() {
+  $("session").textContent = asked + (asked === 1 ? " question, " : " questions, ") + spent + (spent === 1 ? " credit" : " credits") + " used";
+}
+function renderResult(q, r) {
+  const d = r.data;
+  if (!r.ok) {
+    return feedItem(q, h("div", { class: "answer bad" }, h("b", {}, "Request failed"), d.error || "Something went wrong."),
+      h("div", { class: "meta" }, pill("bad", "Denied"), "Not charged"));
+  }
+  const left = d.credits_left;
+  if (d.status === "ok") {
+    const meta = h("div", { class: "meta" }, pill("ok", "Answered"), d.charged + (d.charged === 1 ? " credit" : " credits"), "·", left + " left",
+      h("span", { class: "push" }, icon(LOCK), "Seller content, treat as data"));
+    return feedItem(q, h("div", { class: "answer" }, d.answer), meta);
+  }
+  const info = REASONS[d.reason] || ["limit", "Not answered", d.reason || ""];
+  if (info[0] === "refused") {
+    return feedItem(q, h("div", { class: "answer muted" }, info[1]), h("div", { class: "meta" }, pill("neutral", "Refused"), "Free, you were not charged", "·", left + " left"));
+  }
+  return feedItem(q, h("div", { class: "answer bad" }, h("b", {}, info[1]), info[2]),
+    h("div", { class: "meta" }, pill("bad", d.status === "denied" ? "Denied" : "Limit reached"), "Not charged", "·", left + " left"));
+}
+async function ask() {
+  const q = $("question").value.trim(); if (!q) { $("question").focus(); return; }
+  $("ask").disabled = true; $("ask").textContent = "Asking…"; $("buyer-err").textContent = "";
+  const pending = h("article", { class: "item", "aria-busy": "true" }, h("div", { class: "q" }, q), h("div", { class: "skeleton" }));
+  $("feed").prepend(pending);
+  const r = await api("/api/ask", { method: "POST", body: JSON.stringify({ question: q }) }, bearer());
+  $("ask").textContent = "Ask";
+  pending.replaceWith(renderResult(q, r));
+  if (r.ok) { credits = r.data.credits_left; asked++; spent += r.data.charged; updateSession(); renderMeter(); }
+  else $("ask").disabled = false;
+  if (r.ok && credits > 0) $("ask").disabled = false;
+  if (r.ok && r.data.status === "ok") $("question").value = "";
+  $("question").focus();
+}
+$("ask").onclick = ask;
+$("question").addEventListener("keydown", e => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); if (!$("ask").disabled) ask(); } });
+for (const q of ["Main failure cause for EXP-0007", "Why did the hydrogenation fail?"])
+  $("examples").append(h("button", { class: "chip", type: "button" }, q));
+$("examples").onclick = e => { if (e.target.classList.contains("chip")) { $("question").value = e.target.textContent; $("question").focus(); } };
+$("feed").append(h("div", { class: "empty", id: "feed-empty" }, "No questions yet. Try one of the examples above."));
+new MutationObserver(() => { const e = $("feed-empty"); if (e && $("feed").children.length > 1) e.remove(); }).observe($("feed"), { childList: true });
+if (store.get("key")) { $("key").value = store.get("key"); connect(); }
+
+// ---------- Seller ----------
+const adm = () => ({ "X-Admin-Token": $("admin").value.trim() });
+function table(rows, cols, empty) {
+  if (!rows.length) return h("p", { class: "hint", style: "margin:8px 0 12px" }, empty);
+  return h("table", {}, h("thead", {}, h("tr", {}, ...cols.map(c => h("th", { scope: "col", class: c[2] || "" }, c[0])))),
+    h("tbody", {}, ...rows.map(r => h("tr", {}, ...cols.map(c => h("td", { class: c[2] || "" }, c[1](r)))))));
+}
+const RESULT = { ok: ["ok", "Answered"], refused: ["neutral", "Refused"], denied: ["bad", "Denied"] };
+function buyerStatus(b) {
+  if (b.credits <= 0) return pill("bad", "Out of credits");
+  if (b.credits <= 10) return pill("warn", "Low credits");
+  return pill("ok", "Active");
+}
+async function loadDash() {
+  $("seller-err").textContent = ""; invalid($("admin"), false);
+  if (!$("admin").value.trim()) { invalid($("admin"), true); $("seller-err").textContent = "Paste the admin token printed by skbgw serve."; return; }
+  const r = await api("/api/admin/report", {}, adm());
+  if (!r.ok) { $("dash").classList.add("hidden"); $("lock").classList.add("hidden"); invalid($("admin"), true); $("seller-err").textContent = r.status === 401 ? "Admin token not accepted." : (r.data.error || "Could not load."); return; }
+  store.set("admin", $("admin").value.trim());
+  const d = r.data; $("dash").classList.remove("hidden"); $("lock").classList.remove("hidden");
+  $("stats").replaceChildren(...[["Notes served", d.notes], ["Buyers", d.buyers.length], ["Revenue, credits", d.revenue],
+    ["Queries", d.buyers.reduce((s, b) => s + b.queries, 0)]].map(([l, v]) => h("div", { class: "stat" }, h("span", {}, l), h("b", {}, v))));
+  const q = $("quar"); q.classList.toggle("hidden", !d.quarantined.length);
+  q.replaceChildren(icon(["M12 4l9 16H3L12 4z", "M12 10v4", "M12 17h.01"], 18),
+    h("span", {}, h("strong", {}, d.quarantined.length + (d.quarantined.length === 1 ? " note quarantined" : " notes quarantined")),
+      " as possible prompt injection and not served: ", ...d.quarantined.flatMap((id, i) => [i ? ", " : "", h("span", { class: "mono" }, id)]), "."));
+  $("buyers").replaceChildren(table(d.buyers, [["Buyer", b => h("strong", {}, b.name)], ["Company", b => b.entity],
+    ["Credits left", b => b.credits, "r"], ["Queries", b => b.queries, "r"], ["Status", buyerStatus]], "No buyers yet. Create a key above."));
+  $("recent").replaceChildren(table(d.recent, [["When", e => new Date(e.ts * 1000).toLocaleTimeString()], ["Buyer", e => e.buyer],
+    ["Result", e => { const p = RESULT[e.status] || ["neutral", e.status]; return pill(p[0], p[1]); }],
+    ["Note", e => e.doc_id ? h("span", { class: "mono" }, e.doc_id) : "none"], ["Paid", e => e.charge, "r"], ["Question", e => e.question]],
+    "No activity yet."));
+}
+$("load").onclick = loadDash;
+$("admin").addEventListener("keydown", e => { if (e.key === "Enter") loadDash(); });
+$("lock").onclick = () => { store.set("admin", ""); $("admin").value = ""; $("dash").classList.add("hidden"); $("lock").classList.add("hidden"); $("b-out").replaceChildren(); };
+
+$("b-add").onclick = async () => {
+  $("b-err").textContent = ""; $("b-out").replaceChildren(); invalid($("b-name"), false); invalid($("b-credits"), false);
+  const name = $("b-name").value.trim(), n = parseInt($("b-credits").value, 10);
+  if (!name) { invalid($("b-name"), true); $("b-err").textContent = "Give the buyer a name."; return; }
+  if (!Number.isInteger(n) || n < 0) { invalid($("b-credits"), true); $("b-err").textContent = "Credits must be a whole number, 0 or more."; return; }
+  const r = await api("/api/admin/buyers", { method: "POST", body: JSON.stringify({ name, entity: $("b-entity").value, credits: n }) }, adm());
+  if (!r.ok) { $("b-err").textContent = r.data.error || "Could not create buyer."; return; }
+  const d = r.data;
+  const keyBtn = h("button", { class: "btn ghost small", type: "button" }, "Copy"); keyBtn.onclick = () => copy(d.key, keyBtn);
+  const cmdBtn = h("button", { class: "btn ghost small", type: "button" }, "Copy"); cmdBtn.onclick = () => copy(d.claude_code, cmdBtn);
+  $("b-out").append(h("div", { class: "reveal" },
+    h("div", { class: "warnline" }, icon(["M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18z", "M12 7v5", "M12 16h.01"], 16), "Copy this now. It is shown once and only a hash is stored."),
+    h("div", { class: "codebox" }, h("code", {}, d.key), keyBtn),
+    h("div", { class: "hint" }, "For an AI agent in Claude Code:"),
+    h("div", { class: "codebox" }, h("code", {}, d.claude_code), cmdBtn)));
+  $("b-name").value = ""; $("b-entity").value = "";
+  loadDash();
+};
+$("t-add").onclick = async () => {
+  const n = parseInt($("t-credits").value, 10); invalid($("t-name"), false); invalid($("t-credits"), false);
+  $("t-out").className = "hint";
+  if (!$("t-name").value.trim()) { invalid($("t-name"), true); $("t-out").textContent = "Enter the buyer's name."; return; }
+  if (!Number.isInteger(n) || n < 1) { invalid($("t-credits"), true); $("t-out").textContent = "Enter a whole number of credits, 1 or more."; return; }
+  const r = await api("/api/admin/topup", { method: "POST", body: JSON.stringify({ name: $("t-name").value.trim(), credits: n }) }, adm());
+  $("t-out").className = r.ok ? "okmsg" : "err";
+  $("t-out").textContent = r.ok ? "Added " + n + " credits to " + $("t-name").value.trim() + "." : (r.status === 404 ? "No buyer with that name." : (r.data.error || "Could not top up."));
+  if (r.ok) loadDash();
+};
+$("n-text").addEventListener("input", () => { $("n-count").textContent = $("n-text").value.length.toLocaleString() + " / 20,000"; });
+$("n-add").onclick = async () => {
+  invalid($("n-title"), false); invalid($("n-text"), false); $("n-out").className = "hint";
+  if (!$("n-title").value.trim()) { invalid($("n-title"), true); $("n-out").textContent = "Add a title."; return; }
+  if (!$("n-text").value.trim()) { invalid($("n-text"), true); $("n-out").textContent = "Add some text."; return; }
+  const r = await api("/api/admin/notes", { method: "POST", body: JSON.stringify({ title: $("n-title").value, text: $("n-text").value }) }, adm());
+  $("n-out").className = r.ok ? (r.data.quarantined ? "err" : "okmsg") : "err";
+  $("n-out").textContent = r.ok ? (r.data.quarantined ? "Added, but it looks like prompt injection so it will NOT be served." : "Added as " + r.data.id + ".") : (r.data.error || "Could not add note.");
+  if (r.ok) { $("n-title").value = ""; $("n-text").value = ""; $("n-count").textContent = "0 / 20,000"; loadDash(); }
+};
+if (store.get("admin")) { $("admin").value = store.get("admin"); }
+</script>
+</body>
+</html>

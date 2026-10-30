@@ -8,7 +8,8 @@ from dataclasses import dataclass
 TOKEN = re.compile(r"[a-z0-9]+")
 STOP = frozenset(
     "the and for with that this from was were are has have had not but its into than then "
-    "what which when where how why who does did can could would should about".split()
+    "what which when where how why who does did can could would should about "
+    "tell everything anything please give show details information know happened".split()
 )
 # Heuristic only. Catches crude seller-side injection; a determined seller can evade it (K-002).
 INJECTION = re.compile(
@@ -55,9 +56,12 @@ class KnowledgeBase:
 
     def search(self, query, k=1):
         """Return [(relevance 0..1, Doc)]. Relevance is the share of query idf mass found in the doc."""
-        q = [t for t in set(tokens(query)) if t in self._idf]
-        total = sum(self._idf[t] for t in q)
-        if not total:
+        words = set(tokens(query))
+        q = [t for t in words if t in self._idf]
+        # Words the KB has never seen count against relevance, so junk padding cannot ride on one real token.
+        mean_idf = sum(self._idf.values()) / max(len(self._idf), 1)
+        total = sum(self._idf[t] for t in q) + (len(words) - len(q)) * mean_idf
+        if not q:
             return []
         scored = []
         for d in self.docs:

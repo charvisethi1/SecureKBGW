@@ -56,6 +56,24 @@ From a shell, one department at a time:
 
 `gateway/` is a seller-hosted, metered query gateway exposed as an MCP server, tested on synthetic data only. Results and limits are in [`research/mvp-results.md`](research/mvp-results.md).
 
+### Quick start (seller)
+
+```bash
+./skbgw demo                       # synthetic notes + a demo buyer, prints how the buyer connects
+./skbgw serve                      # web UI at http://localhost:8000/ and MCP at /mcp
+
+./skbgw init ./my-notes            # later: load your own folder of .md / .txt / .json notes
+./skbgw add-buyer "Acme" -c 50     # one key per buyer, with connect instructions
+./skbgw topup "Acme" 100           # add credits
+./skbgw report                     # queries, revenue, documents each buyer has seen
+```
+
+**Web UI.** Open `http://localhost:8000/`. The *Ask* tab is for buyers (paste a key, ask questions, see cost and credits). The *Seller dashboard* tab takes the admin token that `skbgw serve` prints, and lets you create buyer keys, top up credits, add notes and watch activity. Everything shown from seller notes is rendered as plain text.
+
+The buyer pastes one line into Claude Code (printed by `add-buyer`) and then asks questions in plain English. Beyond localhost, serve behind HTTPS. Do not load real seller data before the legal scoping in `research/implementation-plan.md`.
+
+### Developer commands
+
 ```bash
 .venv/bin/python scripts/make_synthetic_kb.py 120 > data/synthetic_kb.json   # generate test data
 .venv/bin/python -m unittest discover -s tests -t .                          # run tests

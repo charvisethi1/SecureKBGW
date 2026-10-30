@@ -13,7 +13,7 @@ DOCS = [
 ]
 
 
-def make(policy=DEFAULT, credits=10, clock=lambda: 0.0):
+def make(policy=Policy(min_interval_s=0), credits=10, clock=lambda: 0.0):
     ledger = Ledger(clock=clock)
     ledger.add_buyer("k", "buyer", credits)
     return Gateway(KnowledgeBase(DOCS), ledger, policy, clock=clock), ledger
@@ -48,11 +48,34 @@ class GatewayTests(unittest.TestCase):
         gw.query("k", "nickel yield")
         self.assertEqual(gw.query("k", "palladium yield").reason, "query budget exhausted")
 
-    def test_information_budget_blocks_new_docs_but_not_seen_ones(self):
-        gw, _ = make(Policy(max_distinct_docs=1))
-        self.assertEqual(gw.query("k", "palladium moisture failure").status, "ok")
-        self.assertEqual(gw.query("k", "nickel ligand failure").reason, "information budget reached")
-        self.assertEqual(gw.query("k", "palladium moisture failure").status, "ok")
+    def test_information_budget_counts_content_not_docs(self):
+        gw, ledger = make(Policy(max_revealed_chars=60, max_sentences=1, min_interval_s=0))
+        first = gw.query("k", "palladium moisture failure cause")
+        self.assertEqual(first.status, "ok")
+        # differently-worded questions about the SAME doc must not reveal more than the budget allows
+        for q in ("palladium yield percent", "palladium 80 C", "palladium used", "percent yield palladium"):
+            r = gw.query("k", q)
+            self.assertTrue(r.status == "refused" or r.answer == first.answer, (q, r))
+        self.assertLessEqual(ledger.revealed("buyer")[1], 60)
+        # re-asking the same thing is free: already-shown text costs no budget
+        self.assertEqual(gw.query("k", "palladium moisture failure cause").status, "ok")
+
+    def test_keys_of_one_entity_share_limits(self):
+        ledger = Ledger()
+        for k in ("k1", "k2"):
+            ledger.add_buyer(k, k, 10, entity="acme")
+        gw = Gateway(KnowledgeBase(DOCS), ledger, Policy(max_queries=2, min_interval_s=0))
+        gw.query("k1", "palladium yield")
+        gw.query("k2", "nickel yield")
+        self.assertEqual(gw.query("k1", "palladium yield").reason, "query budget exhausted")
+
+    def test_junk_padding_does_not_pass_relevance(self):
+        gw, _ = make()
+        self.assertEqual(gw.query("k", "xylophone zeppelin quasar banana palladium").status, "refused")
+
+    def test_overlong_question_denied(self):
+        gw, _ = make(Policy(max_question_chars=20))
+        self.assertEqual(gw.query("k", "palladium " * 10).reason, "question too long")
 
     def test_credits_run_out(self):
         gw, _ = make(credits=1)

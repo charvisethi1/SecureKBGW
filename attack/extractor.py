@@ -7,6 +7,7 @@ attacker: a good result here is necessary, not sufficient (K-001, K-006).
 import random
 import re
 from collections import deque
+from dataclasses import replace
 
 from gateway import Gateway, KnowledgeBase, Ledger, Policy
 from gateway.store import sentences, tokens
@@ -15,6 +16,7 @@ SEEDS = ["failure", "yield", "catalyst", "experiment", "reaction", "temperature"
 
 
 def _fresh(kb, policy, credits=10**9):
+    policy = replace(policy, min_interval_s=0.0)  # measure information limits, not wall-clock speed
     ledger = Ledger()
     ledger.add_buyer("k", "b", credits)
     return Gateway(kb, ledger, policy), ledger
