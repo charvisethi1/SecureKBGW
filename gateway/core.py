@@ -19,6 +19,17 @@ from .policy import DEFAULT, Policy
 from .store import KnowledgeBase, sentences, tokens
 
 
+# Questions asking what to do with money. The sample only reports what happened, with sources.
+ADVICE = re.compile(r"\b(should i|shall i|is it (a )?good (time|idea) to|worth (buying|investing)|buy or sell|"
+                    r"good investment|price target|financial advice|investment advice)\b", re.I)
+ADVICE_REASON = "this demo does not give investment advice"
+# The notes are history, not a feed. Asking for a price "today" cannot be answered truthfully from them.
+LIVE = re.compile(r"\b(today|right now|currently|at the moment|this week|live)\b.*\b(price|quote|trading|worth)\b|"
+                  r"\b(price|quote|trading|worth)\b.*\b(today|right now|currently|at the moment|this week)\b|"
+                  r"\b(current|latest|live) (stock |share )?(price|quote)\b", re.I)
+LIVE_REASON = "this demo has no live prices"
+
+
 @dataclass(frozen=True)
 class Result:
     status: str  # ok | refused | denied
@@ -99,6 +110,12 @@ class Gateway:
         if left < p.price_per_query:
             return Result("denied", reason="insufficient credits", credits_left=left)
 
+        if ADVICE.search(question):
+            self.ledger.record(key, "refused", question)
+            return Result("refused", reason=ADVICE_REASON, credits_left=left)
+        if LIVE.search(question):
+            self.ledger.record(key, "refused", question)
+            return Result("refused", reason=LIVE_REASON, credits_left=left)
         hits = self.kb.search(question, k=1)
         if not hits or hits[0][0] < p.min_relevance:
             self.ledger.record(key, "refused", question)

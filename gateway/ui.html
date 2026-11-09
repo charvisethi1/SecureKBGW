@@ -24,6 +24,18 @@
   body { margin: 0; background: var(--bg); color: var(--ink); font: 15px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, system-ui, sans-serif; }
   button, input, textarea { font: inherit; color: inherit; }
   button:focus-visible, input:focus-visible, textarea:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+  .scope { background: var(--warn-bg); color: var(--ink); border-bottom: 1px solid var(--line); }
+  .scope details { max-width: 1080px; margin: 0 auto; padding: 10px 24px; }
+  .scope summary { cursor: pointer; font-size: 13.5px; color: var(--warn); list-style: none; display: flex; flex-wrap: wrap; gap: 4px 8px; align-items: baseline; }
+  .scope summary::-webkit-details-marker { display: none; }
+  .scope-toggle { margin-left: auto; text-decoration: underline; white-space: nowrap; }
+  .scope-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px 24px; margin-top: 10px; }
+  .scope h3 { margin: 0 0 4px; font-size: 13px; text-transform: none; color: var(--warn); }
+  .scope ul { margin: 0; padding-left: 18px; font-size: 13px; color: var(--ink); }
+  .scope li { margin-bottom: 4px; }
+  .scope-foot { margin: 10px 0 2px; font-size: 13px; font-weight: 600; }
+  @media (max-width: 560px) { .scope details { padding: 10px 16px; } }
   .hidden { display: none !important; }
 
   .top { background: var(--card); border-bottom: 1px solid var(--line); }
@@ -124,9 +136,39 @@
     </nav>
   </div>
 </header>
-<div class="top" id="demo-banner" role="note" hidden style="background:var(--warn-bg);color:var(--warn);border-bottom:0">
-  <div class="top-in" style="min-height:40px;font-size:13.5px;padding-top:8px;padding-bottom:8px"><span><strong>Public demo.</strong> The notes are a sample built from public sources, not private data, and not investment advice. Do not enter anything confidential. Questions are logged.</span></div>
-</div>
+<aside class="scope" id="demo-banner" aria-label="Scope of this demo" hidden>
+  <details id="scope-details" open>
+    <summary><strong>Public demo.</strong> A working prototype on sample data with fake credits. <span class="scope-toggle">What this covers</span></summary>
+    <div class="scope-grid">
+      <section>
+        <h3>What it is</h3>
+        <ul>
+          <li>A prototype of a pay-per-question knowledge gateway. You ask a question and get a short excerpt from a seller's notes, never the whole file.</li>
+          <li>Each answered question costs 1 credit. Off-topic questions are refused and free.</li>
+          <li>Limits apply per company: how many questions, how much text, how fast.</li>
+        </ul>
+      </section>
+      <section>
+        <h3>What the data is</h3>
+        <ul>
+          <li><span id="scope-notes">A set of</span> short notes on tech and US stock market changes since 2020.</li>
+          <li>Built from public sources, mostly Wikipedia. Each note cites its source. Summarised automatically, not hand-verified.</li>
+          <li>Not private or proprietary, and not investment advice. It has no live prices.</li>
+        </ul>
+      </section>
+      <section>
+        <h3>What it is not (yet)</h3>
+        <ul>
+          <li>No real payments. Credits are fake: <span id="scope-credits">15</span> per visitor.</li>
+          <li>No identity checks, so the limits can be sidestepped with many accounts.</li>
+          <li>Keyword matching, not an AI answerer. If you get a refusal or the wrong note, rephrase.</li>
+          <li>Questions are logged. Do not enter anything confidential. Data resets when the demo restarts.</li>
+        </ul>
+      </section>
+    </div>
+    <p class="scope-foot">The aim is to test whether this works and whether it is worth building. Try to break it, and say whether you would pay for it.</p>
+  </details>
+</aside>
 
 <main id="buyer" class="col">
   <div>
@@ -325,6 +367,8 @@ const REASONS = {
   "query budget exhausted": ["limit", "Query limit reached for your company", "Your company has used its allowed number of questions. Ask the seller to raise the limit."],
   "rate limited": ["limit", "Slow down a little", "Questions are limited to a few per second. Wait a moment and ask again."],
   "insufficient credits": ["limit", "You are out of credits", "Ask the seller to top up your account."],
+  "this demo does not give investment advice": ["refused", "This demo reports what happened and cites its sources. It can't tell you what to buy or sell."],
+  "this demo has no live prices": ["refused", "These notes are history with sources, not a live feed, so they can't give today's prices."],
   "question too long": ["limit", "Question too long", "Keep questions under 500 characters."],
 };
 function pill(kind, text) { return h("span", { class: "pill " + kind }, text); }
@@ -383,6 +427,10 @@ if (store.get("key")) { $("key").value = store.get("key"); connect(); }
   if (!r.ok) return;
   if (r.data.demo) {
     $("demo-banner").hidden = false;
+    if (Number.isInteger(r.data.notes)) $("scope-notes").textContent = r.data.notes;
+    $("scope-credits").textContent = r.data.demo_credits;
+    try { if (sessionStorage.getItem("scope-closed") === "1") $("scope-details").open = false; } catch {}
+    $("scope-details").addEventListener("toggle", () => { try { sessionStorage.setItem("scope-closed", $("scope-details").open ? "0" : "1"); } catch {} });
     $("demo-key").classList.remove("hidden");
     $("demo-key").textContent = "Try the demo (" + r.data.demo_credits + " free credits)";
   }

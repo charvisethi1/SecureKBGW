@@ -119,7 +119,8 @@ def build_app(gateway: Gateway, admin_token: str, kb_path: Path, public_url="htt
         return JSONResponse({"name": b["name"], "credits": b["credits"], "queries": b["queries"]})
 
     async def api_config(request):
-        return JSONResponse({"demo": demo, "admin": admin_enabled, "demo_credits": DEMO_CREDITS, "examples": list(examples)})
+        return JSONResponse({"demo": demo, "admin": admin_enabled, "demo_credits": DEMO_CREDITS, "examples": list(examples),
+                             "notes": len(gateway.kb)})
 
     async def api_demo_key(request):
         if not demo:

@@ -6,7 +6,7 @@
  },
  {
   "id": "mkt-2020-crash",
-  "title": "The 2020 stock market crash",
+  "title": "The 2020 stock market crash: how fast stocks fell in February 2020",
   "text": "The 2020 stock market crash began on 20 February 2020 and ended on 7 April 2020. US indices fell at least 10% over 24 to 28 February 2020, which Wikipedia calls the fastest correction from an all-time high in market history, taking six days. The Dow entered a bear market on 11 March 2020, the first in 11 years. US indices did not return to January 2020 levels until November 2020. Source: Wikipedia, 2020 stock market crash."
  },
  {
@@ -21,17 +21,17 @@
  },
  {
   "id": "mkt-fed-2020",
-  "title": "Federal Reserve emergency rate cuts in March 2020",
+  "title": "Federal Reserve (Fed) emergency rate cuts in March 2020",
   "text": "The Federal Reserve cut its target range for the federal funds rate to 1% to 1.25% on 3 March 2020. After an emergency unscheduled meeting on 15 March 2020 the range was 0% to 0.25%. Source: Wikipedia, History of Federal Open Market Committee actions."
  },
  {
   "id": "mkt-sp-returns-2019-2021",
-  "title": "S&P 500 annual returns 2019 to 2021",
+  "title": "S&P 500 stock market annual returns and performance 2019 to 2021",
   "text": "The S&P 500 price return was 28.88% in 2019, 16.26% in 2020 and 26.89% in 2021. Including dividends, total returns were 31.49%, 18.40% and 28.71%. Source: Wikipedia, S&P 500."
  },
  {
   "id": "mkt-sp-returns-2022-2025",
-  "title": "S&P 500 annual returns 2022 to 2025",
+  "title": "S&P 500 stock market annual returns and performance 2022 to 2025",
   "text": "The S&P 500 price return was -19.44% in 2022, 24.23% in 2023, 23.31% in 2024 and 16.39% in 2025. Including dividends, total returns were -18.11%, 26.29%, 25.02% and 17.88%. Source: Wikipedia, S&P 500."
  },
  {
@@ -46,7 +46,7 @@
  },
  {
   "id": "mkt-gamestop-robinhood",
-  "title": "Robinhood trading restrictions during the GameStop squeeze",
+  "title": "Why Robinhood stopped and halted GameStop trades: trading restrictions",
   "text": "On 28 January 2021 Robinhood halted new purchases of GameStop, AMC, BlackBerry, Nokia and other volatile stocks, though customers could still sell. Robinhood and others said clearing houses had raised collateral requirements, and the DTCC raised industry requirements from $26 billion to $33.5 billion. Robinhood faced 34 class-action lawsuits as of 2 February 2021. A House Financial Services hearing on 18 February 2021 questioned Robinhood's and Citadel's chief executives. Source: Wikipedia, GameStop short squeeze."
  },
  {
@@ -56,42 +56,42 @@
  },
  {
   "id": "mkt-2022-causes",
-  "title": "Why stocks fell in 2022: inflation and rate rises",
+  "title": "Why stocks fell in the 2022 bear market: inflation and rate rises",
   "text": "Wikipedia names the highest inflation readings of the 2021 to 2023 inflation surge and the resulting interest rate rises as the main causes of the 2022 decline. The Federal Reserve raised rates 11 times starting in March 2022 and restarted quantitative tightening in June 2022. It was the worst year for the bond market since 1994. Other factors named were recession fears, an inverted yield curve and supply disruptions from Russia's invasion of Ukraine. Source: Wikipedia, 2022 stock market decline."
  },
  {
   "id": "mkt-fed-hiking-cycle",
-  "title": "The Federal Reserve rate path from 2022 to 2024",
-  "text": "The first hike of the 2022 cycle came on 16 March 2022, a 25 basis point rise to 0.25% to 0.50%, by an 8 to 1 vote. The target range reached 5.25% to 5.50% on 26 July 2023 and stayed there through 31 July 2024. Cuts began on 18 September 2024 with a 50 basis point reduction to 4.75% to 5.00%. Source: Wikipedia, History of Federal Open Market Committee actions."
+  "title": "The Federal Reserve (Fed) federal funds rate path from 2022 to 2024: raise, peak, cut",
+  "text": "The Federal Reserve started raising rates on 16 March 2022 and, per Wikipedia, raised them 11 times starting then. The first hike was 25 basis points, to 0.25% to 0.50%, by an 8 to 1 vote. The federal funds target range peaked at 5.25% to 5.50%, reached on 26 July 2023, and stayed there through 31 July 2024. The Fed began cutting rates on 18 September 2024 with a 50 basis point cut to 4.75% to 5.00%. Source: Wikipedia, 2022 stock market decline; History of Federal Open Market Committee actions."
  },
  {
   "id": "mkt-2023-rebound",
-  "title": "The 2023 stock market rebound and AI",
-  "text": "The S&P 500 rose 24.23% in 2023 on a price basis, after falling in 2022. Wikipedia credits the start of the AI boom as one factor in the rebound that began in late 2022. The Magnificent Seven stocks accounted for roughly two thirds of the S&P 500's gains in 2023. Sources: Wikipedia, S&P 500; 2022 stock market decline; Magnificent Seven (stocks)."
+  "title": "The 2023 stock market rebound (recovery) and AI",
+  "text": "Stocks recovered in 2023: the S&P 500 rose 24.23% on a price basis, after falling in 2022. Wikipedia credits the start of the AI boom as one factor in the rebound that began in late 2022. The Magnificent Seven stocks accounted for roughly two thirds of the S&P 500's gains in 2023. Sources: Wikipedia, S&P 500; 2022 stock market decline; Magnificent Seven (stocks)."
  },
  {
   "id": "mkt-svb-collapse",
-  "title": "Silicon Valley Bank collapse in March 2023",
+  "title": "Silicon Valley Bank (SVB) collapse in March 2023: depositors withdraw billions in a bank run",
   "text": "Silicon Valley Bank failed on 10 March 2023 after a bank run. It was the 16th-largest US bank, with $209 billion in total assets at the end of 2022. Customers withdrew $42 billion by the close of 9 March, and another $100 billion was expected the next day. About 89% of its $172 billion in deposits exceeded the FDIC insurance limit. Source: Wikipedia, Collapse of Silicon Valley Bank."
  },
  {
   "id": "mkt-svb-cause",
-  "title": "Why Silicon Valley Bank failed",
+  "title": "Why Silicon Valley Bank (SVB) failed: bonds lost value as interest rates rose",
   "text": "Silicon Valley Bank bought long-term securities as deposits grew. When the Federal Reserve raised interest rates, those bonds lost market value, with unrealised losses above $15 billion on held-to-maturity securities at the end of 2022. On 8 March 2023 it announced it had sold over $21 billion of securities, borrowed $15 billion and would sell stock to raise $2.25 billion, which triggered the run. Source: Wikipedia, Collapse of Silicon Valley Bank."
  },
  {
   "id": "mkt-svb-response",
-  "title": "Government response and bank stocks after SVB",
+  "title": "Regulators' response and bank stocks after SVB: what the government did",
   "text": "On 12 March 2023 the Treasury allowed the FDIC to guarantee uninsured deposits at Silicon Valley Bank and Signature Bank. The Federal Reserve created the Bank Term Funding Program to support other banks. On 13 March 2023 regional bank shares including First Republic, Western Alliance and PacWest fell sharply. US banks lost a combined $100 billion of market value over two days and European banks lost $50 billion. Source: Wikipedia, Collapse of Silicon Valley Bank."
  },
  {
   "id": "mkt-magnificent-seven",
-  "title": "The Magnificent Seven stocks",
+  "title": "The Magnificent Seven (big tech) stocks",
   "text": "The Magnificent Seven are Alphabet, Amazon, Apple, Meta, Microsoft, Nvidia and Tesla. The term was coined in May 2023 by Bank of America analyst Michael Hartnett. The group made up 29% of the S&P 500 by January 2024, and Morgan Stanley put it at 31% by mid-2024. Source: Wikipedia, Magnificent Seven (stocks)."
  },
  {
   "id": "mkt-magnificent-seven-2024",
-  "title": "Magnificent Seven performance and the August 2024 drop",
+  "title": "Magnificent Seven (big tech) performance and the August 2024 selloff",
   "text": "Wikipedia says the Magnificent Seven delivered a 107% return in 2023 and approached a combined $13 trillion valuation in February 2024. On 5 August 2024 the group briefly lost $1 trillion before recovering, with concerns about AI overinvestment cited as a cause. Source: Wikipedia, Magnificent Seven (stocks)."
  },
  {
@@ -107,7 +107,7 @@
  {
   "id": "mkt-deepseek-selloff",
   "title": "The DeepSeek selloff of January 2025",
-  "text": "DeepSeek-R1 launched on 20 January 2025, and by 27 January 2025 DeepSeek had overtaken ChatGPT as the most downloaded free app on the US iOS App Store. Wikipedia links this to an 18% drop in Nvidia's share price. Nvidia lost about $600 billion of market value in one day in January 2025, the largest one-day loss for a US company, attributed to DeepSeek. Sources: Wikipedia, DeepSeek; Nvidia."
+  "text": "DeepSeek-R1 launched on 20 January 2025, and by 27 January 2025 DeepSeek had overtaken ChatGPT as the most downloaded free app on the US iOS App Store. Wikipedia links this to an 18% drop in Nvidia's stock, meaning its share price. Nvidia lost about $600 billion of market value in one day in January 2025, the largest one-day loss for a US company, attributed to DeepSeek. Sources: Wikipedia, DeepSeek; Nvidia."
  },
  {
   "id": "mkt-nvidia-revenue",
@@ -121,8 +121,8 @@
  },
  {
   "id": "tech-chatgpt-launch",
-  "title": "ChatGPT launch and adoption",
-  "text": "ChatGPT was released on 30 November 2022, using the GPT-3.5 model. Wikipedia says it reached 100 million monthly active users two months after its release. GPT-4 followed in March 2023 and GPT-4o in May 2024. Source: Wikipedia, ChatGPT."
+  "title": "ChatGPT launch, release date, first model it started with, and adoption",
+  "text": "ChatGPT was released on 30 November 2022, using the GPT-3.5 model. Wikipedia says it reached 100 million monthly active users two months after its release. GPT-4 was released in March 2023 and GPT-4o in May 2024. Source: Wikipedia, ChatGPT."
  },
  {
   "id": "tech-chatgpt-models",
@@ -142,7 +142,7 @@
  {
   "id": "tech-chips-act",
   "title": "The CHIPS and Science Act",
-  "text": "President Biden signed the CHIPS and Science Act on 9 August 2022. It appropriates $52.7 billion. Provisions include $39 billion in subsidies for chip manufacturing on US soil and $13 billion for semiconductor research and workforce training. It also created a 25% advanced semiconductor manufacturing tax credit. Subsidy recipients are barred for 10 years from producing chips more advanced than 28 nanometres in China and Russia. Source: Wikipedia, CHIPS and Science Act."
+  "text": "President Biden signed the CHIPS and Science Act on 9 August 2022. The act's funding appropriates $52.7 billion. Provisions include $39 billion in subsidies for chip manufacturing on US soil and $13 billion for semiconductor research and workforce training. It also created a 25% advanced semiconductor manufacturing tax credit. Subsidy recipients are barred for 10 years from producing chips more advanced than 28 nanometres in China and Russia. Source: Wikipedia, CHIPS and Science Act."
  },
  {
   "id": "tech-remote-work-census",
@@ -181,12 +181,12 @@
  },
  {
   "id": "tech-aws-cloud",
-  "title": "Amazon Web Services and the cloud market",
+  "title": "Amazon Web Services (AWS) and the cloud market: biggest largest cloud provider and market share",
   "text": "AWS revenue was about $46 billion at the end of 2020 and $128.7 billion in 2025, with $45.6 billion of operating income in 2025. Synergy Research Group put cloud infrastructure share in the first quarter of 2023 at 31% for AWS, 25% for Microsoft Azure and 11% for Google Cloud. Source: Wikipedia, Amazon Web Services."
  },
  {
   "id": "tech-zoom",
-  "title": "Zoom after the pandemic boom",
-  "text": "Zoom went public in April 2019 at $36 a share and rose over 72% on its first trading day. In February 2023 it announced a 15% workforce cut, about 1,300 employees. It was removed from the Nasdaq-100 in December 2023. Source: Wikipedia, Zoom Communications."
+  "title": "Zoom after the pandemic boom: IPO, layoffs and Nasdaq-100 removal",
+  "text": "Zoom's IPO in April 2019 priced at $36 a share, and the stock rose over 72% on its first trading day. In February 2023 it announced a 15% workforce cut, about 1,300 employees. It was removed from the Nasdaq-100 in December 2023. Source: Wikipedia, Zoom Communications."
  }
 ]
