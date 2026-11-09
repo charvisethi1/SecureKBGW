@@ -59,7 +59,7 @@ From a shell, one department at a time:
 ### Quick start (seller)
 
 ```bash
-./skbgw demo                       # synthetic notes + a demo buyer, prints how the buyer connects
+./skbgw demo                       # sample notes (tech and US stocks since 2020) + a demo buyer; --sample chem for generated lab notes
 ./skbgw serve                      # web UI at http://localhost:8000/ and MCP at /mcp
 
 ./skbgw init ./my-notes            # later: load your own folder of .md / .txt / .json notes

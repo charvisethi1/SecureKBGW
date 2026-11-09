@@ -9,6 +9,7 @@ the same document many ways cannot reveal more than the budget, and extra keys i
 entity share it. Entities themselves are whatever the seller issues keys to; nothing here verifies
 that two entities are not the same attacker (K-001).
 """
+import re
 import threading
 import time
 from dataclasses import dataclass
@@ -27,28 +28,47 @@ class Result:
     credits_left: int = 0
 
 
-def build_answer(doc, question, policy, seen, remaining):
-    """Pick up to max_sentences most relevant sentences. Sentences the entity has already seen are
-    free; new ones must fit in `remaining` chars. Returns (text, [(idx, chars)] newly revealed)."""
-    q = set(tokens(question))
+def _clip(s, room):
+    """Cut at a word boundary and mark the cut; the result is never longer than `room`."""
+    if len(s) <= room:
+        return s
+    cut = s[: max(room - 1, 0)].rsplit(" ", 1)[0].rstrip(" ,;:")
+    return (cut + "\u2026") if cut else ""
+
+
+def build_answer(doc, question, policy, seen, remaining, idf=None):
+    """Pick up to max_sentences of the most relevant sentences, returned in reading order.
+    Sentences the entity has already seen are free; new ones must fit in `remaining` chars.
+    Returns (text, [(idx, chars)] newly revealed)."""
+    q, idf = set(tokens(question)), idf or {}
     sents = sentences(doc.text)
-    order = sorted(range(len(sents)), key=lambda i: len(q & set(tokens(sents[i]))), reverse=True)
-    out, new, used = [], [], 0
-    for i in order:
-        if len(out) >= policy.max_sentences:
+    # A trailing "Source: ..." line is attribution, not content: it is not ranked, not budgeted,
+    # and is appended to any answer drawn from this document.
+    source = sents.pop() if sents and re.match(r"sources?:", sents[-1], re.I) else ""
+
+    def score(i):
+        return sum(idf.get(t, 1.0) for t in q & set(tokens(sents[i])))
+
+    picked, new, used = [], [], 0
+    for i in sorted(range(len(sents)), key=lambda i: (-score(i), i)):
+        if len(picked) >= policy.max_sentences:
             break
         s = sents[i]
         is_new = (doc.id, i) not in seen
-        if is_new and len(s) > remaining:
+        room = policy.max_answer_chars - used
+        if (is_new and len(s) > remaining) or room <= 0 or (picked and len(s) > room):
+            continue  # whole sentences only after the first; the first may be clipped
+        text = _clip(s, room)
+        if not text:
             continue
-        s = s[: max(policy.max_answer_chars - used, 0)].rstrip()
-        if not s:
-            break
-        out.append(s)
-        used += len(s)
+        picked.append((i, text))
+        used += len(text)
         if is_new:
-            new.append((i, len(sents[i])))
-            remaining -= len(sents[i])
+            new.append((i, len(s)))
+            remaining -= len(s)
+    out = [t for _, t in sorted(picked)]
+    if out and source:
+        out.append(source)
     return " ".join(out), new
 
 
@@ -85,7 +105,7 @@ class Gateway:
             return Result("refused", reason="no sufficiently relevant knowledge", credits_left=left)
         _, doc = hits[0]
         seen, used_chars = self.ledger.revealed(b["entity"])
-        text, new = build_answer(doc, question, p, seen, p.max_revealed_chars - used_chars)
+        text, new = build_answer(doc, question, p, seen, p.max_revealed_chars - used_chars, self.kb.idf)
         if not text:
             self.ledger.record(key, "refused", question)
             return Result("refused", reason="information budget reached", credits_left=left)

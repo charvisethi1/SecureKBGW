@@ -125,7 +125,7 @@
   </div>
 </header>
 <div class="top" id="demo-banner" role="note" hidden style="background:var(--warn-bg);color:var(--warn);border-bottom:0">
-  <div class="top-in" style="min-height:40px;font-size:13.5px;padding-top:8px;padding-bottom:8px"><span><strong>Public demo.</strong> Everything here is synthetic. Do not enter anything real or confidential. Questions are logged.</span></div>
+  <div class="top-in" style="min-height:40px;font-size:13.5px;padding-top:8px;padding-bottom:8px"><span><strong>Public demo.</strong> The notes are a sample built from public sources, not private data, and not investment advice. Do not enter anything confidential. Questions are logged.</span></div>
 </div>
 
 <main id="buyer" class="col">
@@ -162,7 +162,7 @@
 
   <section class="card stack" aria-label="Ask a question">
     <label for="question" style="margin:0">Your question</label>
-    <textarea id="question" rows="3" maxlength="500" placeholder="e.g. What was the main failure cause for EXP-0007?" style="min-height:84px;border-radius:10px;padding:12px 14px"></textarea>
+    <textarea id="question" rows="3" maxlength="500" placeholder="Ask about tech or US stock market changes since 2020" style="min-height:84px;border-radius:10px;padding:12px 14px"></textarea>
     <div class="between">
       <div class="chips" id="examples"><span class="hint">Try</span></div>
       <div class="chips"><span class="hint">Enter to send, Shift+Enter for a new line</span><button class="btn" id="ask" type="button" disabled>Ask</button></div>
@@ -367,8 +367,11 @@ async function ask() {
 }
 $("ask").onclick = ask;
 $("question").addEventListener("keydown", e => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); if (!$("ask").disabled) ask(); } });
-for (const q of ["Main failure cause for EXP-0007", "Why did the hydrogenation fail?"])
-  $("examples").append(h("button", { class: "chip", type: "button" }, q));
+function setExamples(list) {
+  $("examples").replaceChildren(h("span", { class: "hint" }, "Try"), ...list.map(q => h("button", { class: "chip", type: "button" }, q)));
+  if (list.length) $("question").placeholder = "e.g. " + list[0];
+}
+setExamples(["What happened to the S&P 500 in 2022?", "What caused the chip shortage?"]);
 $("examples").onclick = e => { if (e.target.classList.contains("chip")) { $("question").value = e.target.textContent; $("question").focus(); } };
 $("feed").append(h("div", { class: "empty", id: "feed-empty" }, "No questions yet. Try one of the examples above."));
 new MutationObserver(() => { const e = $("feed-empty"); if (e && $("feed").children.length > 1) e.remove(); }).observe($("feed"), { childList: true });
@@ -384,6 +387,7 @@ if (store.get("key")) { $("key").value = store.get("key"); connect(); }
     $("demo-key").textContent = "Try the demo (" + r.data.demo_credits + " free credits)";
   }
   if (!r.data.admin) { $("tab-seller").classList.add("hidden"); }
+  if (Array.isArray(r.data.examples) && r.data.examples.length) setExamples(r.data.examples.slice(0, 4).map(String));
 })();
 $("demo-key").onclick = async () => {
   $("buyer-err").textContent = ""; $("demo-key").disabled = true;

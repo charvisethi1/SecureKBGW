@@ -19,8 +19,13 @@ INJECTION = re.compile(
 )
 
 
+def _norm(t):
+    """Plain plural handling so 'layoffs' matches 'layoff'. Deliberately crude: no real stemming."""
+    return t[:-1] if len(t) > 3 and t.endswith("s") and not t.endswith("ss") else t
+
+
 def tokens(text):
-    return [t for t in TOKEN.findall(text.lower()) if t not in STOP and len(t) > 2]
+    return [_norm(t) for t in TOKEN.findall(text.lower()) if t not in STOP and (len(t) > 2 or t.isdigit())]
 
 
 def sentences(text):
@@ -54,6 +59,10 @@ class KnowledgeBase:
     def __len__(self):
         return len(self.docs)
 
+    @property
+    def idf(self):
+        return self._idf
+
     def search(self, query, k=1):
         """Return [(relevance 0..1, Doc)]. Relevance is the share of query idf mass found in the doc."""
         words = set(tokens(query))
@@ -67,7 +76,10 @@ class KnowledgeBase:
         for d in self.docs:
             tf = self._tf[d.id]
             hit = sum(self._idf[t] * (1 + math.log(tf[t])) for t in q if t in tf)
-            matched = sum(self._idf[t] for t in q if t in tf)
-            scored.append((matched / total, hit, d))
+            found = [t for t in q if t in tf]
+            matched = sum(self._idf[t] for t in found)
+            # With two or more content words, one shared word is a coincidence ("capital" in "Melvin Capital").
+            enough = len(found) >= min(2, len(words))
+            scored.append((matched / total if enough else 0.0, hit, d))
         scored.sort(key=lambda s: (s[0], s[1]), reverse=True)
         return [(rel, d) for rel, _, d in scored[:k] if rel > 0]

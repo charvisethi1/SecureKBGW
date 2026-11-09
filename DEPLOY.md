@@ -1,13 +1,14 @@
 # Taking the public demo live
 
-This deploys the **synthetic-data demo**: visitors get their own key with 15 free credits, the seller dashboard is switched off, and nothing real is stored. Do not put real company data in it. The legal scoping in `research/implementation-plan.md` has not happened.
+This deploys the **sample-data demo**: visitors get their own key with 15 free credits, the seller dashboard is switched off, and nothing confidential is stored. The default sample is 35 short notes on tech and US stock market changes since 2020, built from public sources (mostly Wikipedia, each note names its source, retrieved 2026-11-09; see `data/market_tech_kb.json`). It is not private data and not investment advice. Do not put real company data in it. The legal scoping in `research/implementation-plan.md` has not happened.
 
 ## What the container does
 `Dockerfile` runs `python -m gateway serve` with these defaults:
 
 | Setting | Value | Why |
 |---|---|---|
-| `SKBGW_DEMO=1` | on | creates 120 synthetic notes on first start, enables the "Try the demo" button |
+| `SKBGW_DEMO=1` | on | loads the sample notes on first start, enables the "Try the demo" button |
+| `SKBGW_SAMPLE` | `markets` | which sample: `markets` (tech and US stocks) or `chem` (generated failed experiments) |
 | `SKBGW_DISABLE_ADMIN=1` | on | admin routes return 404, the Seller tab is hidden |
 | `SKBGW_HOME=/data` | | where the SQLite ledger and notes live |
 | `PORT` | set by the host | server binds `0.0.0.0:$PORT` |
@@ -41,10 +42,11 @@ curl -s URL/api/config                      # {"demo":true,"admin":false,...}
 curl -s -X POST URL/api/demo-key            # returns a key with 15 credits
 curl -s -o /dev/null -w '%{http_code}\n' URL/api/admin/report   # must be 404
 ```
-Then open `URL/` in a browser, click **Try the demo**, and ask `Main failure cause for EXP-0007`.
+Then open `URL/` in a browser, click **Try the demo**, and ask `What happened to the S&P 500 in 2022?`.
 
 ## Before you post the link
-- [ ] The banner says "Public demo, synthetic data" (it appears automatically in demo mode).
+- [ ] The banner says it is a public demo with a sample from public sources (it appears automatically in demo mode).
+- [ ] You spot-checked a handful of figures in `data/market_tech_kb.json` against their sources. The notes were summarised from the pages by an automated fetch, not hand-verified.
 - [ ] `/api/admin/report` returns 404.
 - [ ] You looked at the page on your phone and in a dark-mode browser.
 - [ ] You know how to take it down (Render: suspend the service; Fly: `fly scale count 0`).

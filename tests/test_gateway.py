@@ -73,6 +73,28 @@ class GatewayTests(unittest.TestCase):
         gw, _ = make()
         self.assertEqual(gw.query("k", "xylophone zeppelin quasar banana palladium").status, "refused")
 
+    def test_one_shared_word_is_not_enough_when_question_has_several(self):
+        docs = [Doc("M-1", "Melvin", "Melvin Capital lost money in January. Positions were closed.")]
+        ledger = Ledger()
+        ledger.add_buyer("k", "buyer", 5)
+        gw = Gateway(KnowledgeBase(docs), ledger, Policy(min_interval_s=0))
+        self.assertEqual(gw.query("k", "What is the capital of France?").status, "refused")
+        self.assertEqual(gw.query("k", "Melvin Capital").status, "ok")
+        self.assertEqual(gw.query("k", "capital").status, "ok")  # a one-word question still works
+
+    def test_source_line_is_attribution_not_content(self):
+        docs = [Doc("S-1", "Chip shortage", "The chip shortage ran from 2020 to 2023. Cars were hit hardest. Source: Wikipedia, chip shortage.")]
+        ledger = Ledger()
+        ledger.add_buyer("k", "buyer", 5)
+        gw = Gateway(KnowledgeBase(docs), ledger, Policy(min_interval_s=0, max_sentences=1))
+        r = gw.query("k", "chip shortage")
+        self.assertEqual(r.answer, "The chip shortage ran from 2020 to 2023. Source: Wikipedia, chip shortage.")
+        self.assertEqual(ledger.revealed("buyer")[1], len("The chip shortage ran from 2020 to 2023."))
+
+    def test_plurals_match(self):
+        gw, _ = make()
+        self.assertEqual(gw.query("k", "palladiums failures").status, "ok")
+
     def test_overlong_question_denied(self):
         gw, _ = make(Policy(max_question_chars=20))
         self.assertEqual(gw.query("k", "palladium " * 10).reason, "question too long")

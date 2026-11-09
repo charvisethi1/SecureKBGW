@@ -67,7 +67,7 @@ DEMO_KEYS_TOTAL = 500
 
 
 def build_app(gateway: Gateway, admin_token: str, kb_path: Path, public_url="http://localhost:8000",
-              demo=False, admin_enabled=True):
+              demo=False, admin_enabled=True, examples=()):
     mcp = MCPServer("secure-kb-gateway", instructions=INSTRUCTIONS)
 
     @mcp.tool()
@@ -119,7 +119,7 @@ def build_app(gateway: Gateway, admin_token: str, kb_path: Path, public_url="htt
         return JSONResponse({"name": b["name"], "credits": b["credits"], "queries": b["queries"]})
 
     async def api_config(request):
-        return JSONResponse({"demo": demo, "admin": admin_enabled, "demo_credits": DEMO_CREDITS})
+        return JSONResponse({"demo": demo, "admin": admin_enabled, "demo_credits": DEMO_CREDITS, "examples": list(examples)})
 
     async def api_demo_key(request):
         if not demo:

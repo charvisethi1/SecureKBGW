@@ -99,7 +99,7 @@ class WebTests(unittest.TestCase):
 
     def test_demo_mode_issues_limited_keys_and_hides_admin(self):
         app = build_app(self.gw, ADMIN, self.kb_path, demo=True, admin_enabled=False)
-        self.assertEqual(call(app, "GET", "/api/config")["json"], {"demo": True, "admin": False, "demo_credits": 15})
+        self.assertEqual(call(app, "GET", "/api/config")["json"], {"demo": True, "admin": False, "demo_credits": 15, "examples": []})
         codes = [call(app, "POST", "/api/demo-key", {"x-forwarded-for": "1.2.3.4"})["status"] for _ in range(4)]
         self.assertEqual(codes, [200, 200, 200, 429])
         other = call(app, "POST", "/api/demo-key", {"x-forwarded-for": "5.6.7.8"})

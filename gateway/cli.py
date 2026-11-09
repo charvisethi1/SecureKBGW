@@ -72,11 +72,24 @@ def cmd_topup(a):
     print(f"Added {a.credits} credits to {n} buyer(s) named '{a.name}'." if n else f"No buyer named '{a.name}'.")
 
 
-def _seed_synthetic():
-    from importlib import import_module  # synthetic data lives in scripts/, outside the package
+SAMPLES = {
+    "markets": ("market_tech_kb.json", ["What happened to the S&P 500 in 2022?", "Why did Nvidia become so valuable?", "What caused the chip shortage?"]),
+    "chem": (None, ["Main failure cause for EXP-0007", "Why did the hydrogenation fail?"]),
+}
 
-    sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "scripts"))
-    docs = import_module("make_synthetic_kb").make(120)
+
+def _seed_synthetic(sample="chem"):
+    """Write a demo knowledge base. 'markets' = public tech and US stock history notes (sourced);
+    'chem' = generated failed-experiment notes."""
+    root = Path(__file__).resolve().parent.parent
+    fname = SAMPLES[sample][0]
+    if fname:
+        docs = json.loads((root / "data" / fname).read_text())
+    else:
+        from importlib import import_module  # synthetic data lives in scripts/, outside the package
+
+        sys.path.insert(0, str(root / "scripts"))
+        docs = import_module("make_synthetic_kb").make(120)
     HOME.mkdir(parents=True, exist_ok=True)
     (HOME / "kb.json").write_text(json.dumps(docs, indent=1))
 
@@ -90,8 +103,9 @@ def cmd_serve(a):
     port = a.port or int(os.environ.get("PORT") or 8000)
     demo = a.demo or os.environ.get("SKBGW_DEMO") == "1"
     admin_enabled = os.environ.get("SKBGW_DISABLE_ADMIN") != "1"
+    sample = os.environ.get("SKBGW_SAMPLE", a.sample or "markets")
     if demo and not (HOME / "kb.json").exists():
-        _seed_synthetic()
+        _seed_synthetic(sample)
     gw = Gateway(_kb(), _ledger(), DEFAULT)
     token = os.environ.get("SKBGW_ADMIN_TOKEN", "").strip()
     token_file = HOME / "admin-token"
@@ -110,7 +124,8 @@ def cmd_serve(a):
         print(f"  Seller dashboard admin token: {token}   (also in {token_file})")
     elif not admin_enabled:
         print("  Admin routes are disabled (SKBGW_DISABLE_ADMIN=1).")
-    app = build_app(gw, token, HOME / "kb.json", url, demo=demo, admin_enabled=admin_enabled)
+    app = build_app(gw, token, HOME / "kb.json", url, demo=demo, admin_enabled=admin_enabled,
+                    examples=SAMPLES[sample][1])
     uvicorn.run(app, host=host, port=port, log_level="warning", proxy_headers=True, forwarded_allow_ips="*")
 
 
@@ -131,10 +146,10 @@ def cmd_report(a):
 
 
 def cmd_demo(a):
-    _seed_synthetic()
+    _seed_synthetic(a.sample)
     key = "skb_" + secrets.token_urlsafe(24)
     _ledger().add_buyer(key, "demo buyer", 50)
-    print("Demo ready: 120 synthetic notes and a demo buyer with 50 credits.")
+    print(f"Demo ready: {a.sample} sample notes and a demo buyer with 50 credits.")
     _connect_help(key, a.port)
     print("\nNow run: skbgw serve")
 
@@ -147,11 +162,13 @@ def main(argv=None):
     s.add_argument("--entity", help="buying company; keys with the same entity share limits"); s.add_argument("--port", type=int, default=8000); s.set_defaults(fn=cmd_add_buyer)
     s = sub.add_parser("topup"); s.add_argument("name"); s.add_argument("credits", type=int); s.set_defaults(fn=cmd_topup)
     s = sub.add_parser("serve"); s.add_argument("--host"); s.add_argument("--port", type=int)
-    s.add_argument("--demo", action="store_true", help="public demo: synthetic data and a self-serve key button")
+    s.add_argument("--demo", action="store_true", help="public demo: sample data and a self-serve key button")
+    s.add_argument("--sample", choices=sorted(SAMPLES), help="demo knowledge base (default: markets)")
     s.set_defaults(fn=cmd_serve)
     s = sub.add_parser("ask"); s.add_argument("key"); s.add_argument("question"); s.set_defaults(fn=cmd_ask)
     s = sub.add_parser("report"); s.set_defaults(fn=cmd_report)
-    s = sub.add_parser("demo"); s.add_argument("--port", type=int, default=8000); s.set_defaults(fn=cmd_demo)
+    s = sub.add_parser("demo"); s.add_argument("--port", type=int, default=8000)
+    s.add_argument("--sample", choices=sorted(SAMPLES), default="markets"); s.set_defaults(fn=cmd_demo)
     a = p.parse_args(argv)
     a.fn(a)
 
