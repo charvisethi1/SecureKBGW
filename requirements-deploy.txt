@@ -1,0 +1,4 @@
+# Runtime dependencies for hosting, pinned to the versions the tests ran against.
+mcp==2.3.0
+uvicorn==0.54.0
+starlette==1.7.0

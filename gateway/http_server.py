@@ -11,6 +11,8 @@ import contextvars
 import json
 import re
 import secrets
+import time
+from collections import defaultdict
 from pathlib import Path
 
 from mcp.server.mcpserver import MCPServer
@@ -59,7 +61,13 @@ def _result(r):
             "credits_left": r.credits_left, "content_type": "untrusted_seller_data"}
 
 
-def build_app(gateway: Gateway, admin_token: str, kb_path: Path, public_url="http://localhost:8000"):
+DEMO_CREDITS = 15
+DEMO_KEYS_PER_IP_PER_HOUR = 3
+DEMO_KEYS_TOTAL = 500
+
+
+def build_app(gateway: Gateway, admin_token: str, kb_path: Path, public_url="http://localhost:8000",
+              demo=False, admin_enabled=True):
     mcp = MCPServer("secure-kb-gateway", instructions=INSTRUCTIONS)
 
     @mcp.tool()
@@ -74,7 +82,15 @@ def build_app(gateway: Gateway, admin_token: str, kb_path: Path, public_url="htt
         return key if key and gateway.ledger.buyer(key) else None
 
     def is_admin(request):
-        return secrets.compare_digest(request.headers.get("x-admin-token", ""), admin_token)
+        return admin_enabled and secrets.compare_digest(request.headers.get("x-admin-token", ""), admin_token)
+
+    issued = defaultdict(list)  # ip -> timestamps of demo keys issued (in memory; resets on restart)
+
+    def client_ip(request):
+        # Behind a platform proxy the first X-Forwarded-For hop is the client. A direct caller can spoof it,
+        # which only weakens the per-IP demo limit; the total cap below still holds.
+        fwd = request.headers.get("fly-client-ip") or request.headers.get("x-forwarded-for", "").split(",")[0].strip()
+        return fwd or (request.client.host if request.client else "unknown")
 
     async def body(request):
         try:
@@ -102,8 +118,26 @@ def build_app(gateway: Gateway, admin_token: str, kb_path: Path, public_url="htt
         b = gateway.ledger.buyer(key)
         return JSONResponse({"name": b["name"], "credits": b["credits"], "queries": b["queries"]})
 
+    async def api_config(request):
+        return JSONResponse({"demo": demo, "admin": admin_enabled, "demo_credits": DEMO_CREDITS})
+
+    async def api_demo_key(request):
+        if not demo:
+            return JSONResponse({"error": "not found"}, status_code=404)
+        ip, now = client_ip(request), time.time()
+        issued[ip] = [t for t in issued[ip] if now - t < 3600]
+        total = sum(1 for b in gateway.ledger.buyers() if b["name"].startswith("Demo visitor"))
+        if len(issued[ip]) >= DEMO_KEYS_PER_IP_PER_HOUR or total >= DEMO_KEYS_TOTAL:
+            return JSONResponse({"error": "Demo keys are limited right now. Try again later."}, status_code=429)
+        issued[ip].append(now)
+        key = "skb_" + secrets.token_urlsafe(24)
+        gateway.ledger.add_buyer(key, "Demo visitor " + secrets.token_hex(2), DEMO_CREDITS)
+        return JSONResponse({"key": key, "credits": DEMO_CREDITS})
+
     def admin_only(fn):
         async def wrapper(request):
+            if not admin_enabled:
+                return JSONResponse({"error": "not found"}, status_code=404)
             if not is_admin(request):
                 return JSONResponse({"error": "admin token required"}, status_code=401)
             return await fn(request)
@@ -164,6 +198,8 @@ def build_app(gateway: Gateway, admin_token: str, kb_path: Path, public_url="htt
         Route("/", home, methods=["GET"]),
         Route("/api/ask", api_ask, methods=["POST"]),
         Route("/api/me", api_me, methods=["GET"]),
+        Route("/api/config", api_config, methods=["GET"]),
+        Route("/api/demo-key", api_demo_key, methods=["POST"]),
         Route("/api/admin/report", admin_report, methods=["GET"]),
         Route("/api/admin/buyers", admin_add_buyer, methods=["POST"]),
         Route("/api/admin/topup", admin_topup, methods=["POST"]),

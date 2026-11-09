@@ -1,0 +1,11 @@
+.venv
+.git
+skbgw-data
+logs
+research
+findings
+digests
+tests
+attack
+__pycache__
+*.pyc

@@ -9,6 +9,7 @@
 """
 import argparse
 import json
+import os
 import secrets
 import sys
 from pathlib import Path
@@ -19,7 +20,7 @@ from .ledger import Ledger
 from .policy import DEFAULT
 from .store import KnowledgeBase, Doc
 
-HOME = Path("skbgw-data")
+HOME = Path(os.environ.get("SKBGW_HOME", "skbgw-data"))
 
 
 def _kb():
@@ -30,7 +31,7 @@ def _kb():
 
 
 def _ledger():
-    HOME.mkdir(exist_ok=True)
+    HOME.mkdir(parents=True, exist_ok=True)
     return Ledger(str(HOME / "ledger.db"))
 
 
@@ -71,22 +72,46 @@ def cmd_topup(a):
     print(f"Added {a.credits} credits to {n} buyer(s) named '{a.name}'." if n else f"No buyer named '{a.name}'.")
 
 
+def _seed_synthetic():
+    from importlib import import_module  # synthetic data lives in scripts/, outside the package
+
+    sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "scripts"))
+    docs = import_module("make_synthetic_kb").make(120)
+    HOME.mkdir(parents=True, exist_ok=True)
+    (HOME / "kb.json").write_text(json.dumps(docs, indent=1))
+
+
 def cmd_serve(a):
     import uvicorn
     from .http_server import build_app
 
+    on_host = bool(os.environ.get("PORT"))  # hosting platforms set PORT and expect 0.0.0.0
+    host = a.host or ("0.0.0.0" if on_host else "127.0.0.1")
+    port = a.port or int(os.environ.get("PORT") or 8000)
+    demo = a.demo or os.environ.get("SKBGW_DEMO") == "1"
+    admin_enabled = os.environ.get("SKBGW_DISABLE_ADMIN") != "1"
+    if demo and not (HOME / "kb.json").exists():
+        _seed_synthetic()
     gw = Gateway(_kb(), _ledger(), DEFAULT)
+    token = os.environ.get("SKBGW_ADMIN_TOKEN", "").strip()
     token_file = HOME / "admin-token"
-    if not token_file.exists():
-        token_file.write_text(secrets.token_urlsafe(24))
-        token_file.chmod(0o600)
-    token = token_file.read_text().strip()
-    url = f"http://localhost:{a.port}"
-    print(f"Serving {len(gw.kb)} notes. (Ctrl+C to stop)")
+    if admin_enabled and not token:
+        if not token_file.exists():
+            token_file.write_text(secrets.token_urlsafe(24))
+            token_file.chmod(0o600)
+        token = token_file.read_text().strip()
+    if not admin_enabled:
+        token = secrets.token_urlsafe(32)  # unguessable and never shown: admin routes are off anyway
+    url = os.environ.get("SKBGW_PUBLIC_URL", f"http://localhost:{port}").rstrip("/")
+    print(f"Serving {len(gw.kb)} notes on {host}:{port}{' (demo mode: self-serve keys, synthetic data)' if demo else ''}. Ctrl+C to stop.")
     print(f"  Web UI:          {url}/")
     print(f"  MCP for agents:  {url}/mcp")
-    print(f"  Seller dashboard admin token: {token}   (also in {token_file})")
-    uvicorn.run(build_app(gw, token, HOME / "kb.json", url), host=a.host, port=a.port, log_level="warning")
+    if admin_enabled and "SKBGW_ADMIN_TOKEN" not in os.environ:
+        print(f"  Seller dashboard admin token: {token}   (also in {token_file})")
+    elif not admin_enabled:
+        print("  Admin routes are disabled (SKBGW_DISABLE_ADMIN=1).")
+    app = build_app(gw, token, HOME / "kb.json", url, demo=demo, admin_enabled=admin_enabled)
+    uvicorn.run(app, host=host, port=port, log_level="warning", proxy_headers=True, forwarded_allow_ips="*")
 
 
 def cmd_ask(a):
@@ -106,12 +131,7 @@ def cmd_report(a):
 
 
 def cmd_demo(a):
-    from importlib import import_module  # synthetic data lives in scripts/, outside the package
-
-    sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "scripts"))
-    docs = import_module("make_synthetic_kb").make(120)
-    HOME.mkdir(exist_ok=True)
-    (HOME / "kb.json").write_text(json.dumps(docs, indent=1))
+    _seed_synthetic()
     key = "skb_" + secrets.token_urlsafe(24)
     _ledger().add_buyer(key, "demo buyer", 50)
     print("Demo ready: 120 synthetic notes and a demo buyer with 50 credits.")
@@ -126,7 +146,8 @@ def main(argv=None):
     s = sub.add_parser("add-buyer"); s.add_argument("name"); s.add_argument("-c", "--credits", type=int, default=50)
     s.add_argument("--entity", help="buying company; keys with the same entity share limits"); s.add_argument("--port", type=int, default=8000); s.set_defaults(fn=cmd_add_buyer)
     s = sub.add_parser("topup"); s.add_argument("name"); s.add_argument("credits", type=int); s.set_defaults(fn=cmd_topup)
-    s = sub.add_parser("serve"); s.add_argument("--host", default="127.0.0.1"); s.add_argument("--port", type=int, default=8000)
+    s = sub.add_parser("serve"); s.add_argument("--host"); s.add_argument("--port", type=int)
+    s.add_argument("--demo", action="store_true", help="public demo: synthetic data and a self-serve key button")
     s.set_defaults(fn=cmd_serve)
     s = sub.add_parser("ask"); s.add_argument("key"); s.add_argument("question"); s.set_defaults(fn=cmd_ask)
     s = sub.add_parser("report"); s.set_defaults(fn=cmd_report)

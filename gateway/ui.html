@@ -124,6 +124,9 @@
     </nav>
   </div>
 </header>
+<div class="top" id="demo-banner" role="note" hidden style="background:var(--warn-bg);color:var(--warn);border-bottom:0">
+  <div class="top-in" style="min-height:40px;font-size:13.5px;padding-top:8px;padding-bottom:8px"><span><strong>Public demo.</strong> Everything here is synthetic. Do not enter anything real or confidential. Questions are logged.</span></div>
+</div>
 
 <main id="buyer" class="col">
   <div>
@@ -135,6 +138,7 @@
     <div id="connect-row" class="row">
       <div class="grow"><label for="key">Buyer key</label><input id="key" type="password" placeholder="skb_..." autocomplete="off"></div>
       <button class="btn" id="connect" type="button">Connect</button>
+      <button class="btn ghost hidden" id="demo-key" type="button">Try the demo</button>
     </div>
     <div id="connected" class="between hidden">
       <div class="who">
@@ -369,6 +373,25 @@ $("examples").onclick = e => { if (e.target.classList.contains("chip")) { $("que
 $("feed").append(h("div", { class: "empty", id: "feed-empty" }, "No questions yet. Try one of the examples above."));
 new MutationObserver(() => { const e = $("feed-empty"); if (e && $("feed").children.length > 1) e.remove(); }).observe($("feed"), { childList: true });
 if (store.get("key")) { $("key").value = store.get("key"); connect(); }
+
+// Deployment config: public demo mode shows a banner and a self-serve key; admin can be switched off.
+(async () => {
+  const r = await api("/api/config", {}, {});
+  if (!r.ok) return;
+  if (r.data.demo) {
+    $("demo-banner").hidden = false;
+    $("demo-key").classList.remove("hidden");
+    $("demo-key").textContent = "Try the demo (" + r.data.demo_credits + " free credits)";
+  }
+  if (!r.data.admin) { $("tab-seller").classList.add("hidden"); }
+})();
+$("demo-key").onclick = async () => {
+  $("buyer-err").textContent = ""; $("demo-key").disabled = true;
+  const r = await api("/api/demo-key", { method: "POST" }, {});
+  $("demo-key").disabled = false;
+  if (!r.ok) { $("buyer-err").textContent = r.data.error || "Could not get a demo key."; return; }
+  $("key").value = r.data.key; connect();
+};
 
 // ---------- Seller ----------
 const adm = () => ({ "X-Admin-Token": $("admin").value.trim() });
