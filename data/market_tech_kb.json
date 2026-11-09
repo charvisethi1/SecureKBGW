@@ -160,9 +160,24 @@
   "text": "In early 2025 the US government ordered millions of federal employees back to offices. Wikipedia says media outlets described employers raising in-office expectations gradually without formal mandates as hybrid creep in 2026. Source: Wikipedia, Remote work."
  },
  {
-  "id": "tech-layoffs",
-  "title": "Tech layoffs in 2022 and 2023",
-  "text": "A mid-2023 Layoffs.fyi snapshot counted more than 161,000 tech employees laid off at 1,046 companies in 2022. A December 2023 report citing Layoffs.fyi gave about 260,238 across 1,169 companies for 2023. Meta cut more than 11,000 jobs in November 2022. Amazon announced 18,000 cuts, then 9,000 more in March 2023, and Google announced about 12,000, around 6% of its workforce. Counts vary by snapshot. Sources: TechCrunch; Business Today."
+  "id": "tech-layoffs-totals",
+  "title": "Total tech layoffs in 2022 and 2023",
+  "text": "A mid-2023 Layoffs.fyi snapshot counted more than 161,000 tech employees laid off at 1,046 companies in 2022. A December 2023 report citing Layoffs.fyi gave about 260,238 tech layoffs across 1,169 companies for 2023. Counts vary by snapshot and only cover companies the tracker follows. Sources: TechCrunch; Business Today."
+ },
+ {
+  "id": "tech-layoffs-amazon",
+  "title": "Amazon layoffs in 2022 and 2023",
+  "text": "Amazon laid off about 18,000 employees in several rounds starting in November 2022 and continuing into early 2023. In March 2023 Amazon announced a further 9,000 layoffs. These are announced cuts as reported, not audited totals. Sources: TechCrunch; Business Today."
+ },
+ {
+  "id": "tech-layoffs-meta",
+  "title": "Meta layoffs in 2022 and 2023",
+  "text": "Meta's layoffs began in November 2022, when it cut more than 11,000 employees. By one 2023 tracker, about 21,000 people had lost their jobs at Meta since November 2022. These are reported figures, not audited totals. Sources: Yahoo Finance layoffs tracker; TechCrunch."
+ },
+ {
+  "id": "tech-layoffs-google",
+  "title": "Google layoffs in 2023",
+  "text": "Google announced plans to lay off about 12,000 employees globally, around 6% of its workforce. The cuts reached divisions including Area 120 and Intrinsic. This is an announced figure as reported, not an audited total. Sources: TechCrunch; Business Today."
  },
  {
   "id": "tech-aws-cloud",

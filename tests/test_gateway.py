@@ -91,6 +91,15 @@ class GatewayTests(unittest.TestCase):
         self.assertEqual(r.answer, "The chip shortage ran from 2020 to 2023. Source: Wikipedia, chip shortage.")
         self.assertEqual(ledger.revealed("buyer")[1], len("The chip shortage ran from 2020 to 2023."))
 
+    def test_lay_off_forms_match_and_company_note_wins(self):
+        docs = [Doc("G", "Google", "Google announced plans to lay off about 12,000 employees."),
+                Doc("M", "Meta", "Meta's layoffs began in November 2022 with more than 11,000 employees cut.")]
+        ledger = Ledger()
+        ledger.add_buyer("k", "buyer", 9)
+        gw = Gateway(KnowledgeBase(docs), ledger, Policy(min_interval_s=0))
+        self.assertIn("Meta", gw.query("k", "Did Meta lay off people?").answer)
+        self.assertIn("Google", gw.query("k", "How many were laid off at Google?").answer)
+
     def test_plurals_match(self):
         gw, _ = make()
         self.assertEqual(gw.query("k", "palladiums failures").status, "ok")

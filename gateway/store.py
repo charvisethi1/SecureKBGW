@@ -9,7 +9,7 @@ TOKEN = re.compile(r"[a-z0-9]+")
 STOP = frozenset(
     "the and for with that this from was were are has have had not but its into than then "
     "what which when where how why who does did can could would should about "
-    "tell everything anything please give show details information know happened".split()
+    "tell everything anything please give show details information know happened off".split()
 )
 # Heuristic only. Catches crude seller-side injection; a determined seller can evade it (K-002).
 INJECTION = re.compile(
@@ -24,8 +24,18 @@ def _norm(t):
     return t[:-1] if len(t) > 3 and t.endswith("s") and not t.endswith("ss") else t
 
 
+# A few word forms that mean the same thing for retrieval ("lay off", "laid off", "layoffs").
+ALIAS = {"lay": "layoff", "laid": "layoff", "laying": "layoff"}
+
+
 def tokens(text):
-    return [_norm(t) for t in TOKEN.findall(text.lower()) if t not in STOP and (len(t) > 2 or t.isdigit())]
+    out = []
+    for t in TOKEN.findall(text.lower()):
+        if t in STOP or not (len(t) > 2 or t.isdigit()):
+            continue
+        t = _norm(t)
+        out.append(ALIAS.get(t, t))
+    return out
 
 
 def sentences(text):
